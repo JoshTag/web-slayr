@@ -1,18 +1,23 @@
 <template>
   <div>
-    <h2>{{ monsters[0].name }}</h2>
+    <h2>{{ currentMonster.name }}</h2>
 
     <div id="monster-health">
-      <div v-bind:style="{width: monsters[0].currentHP + '%'}"></div>
+      <div v-bind:style="{width: this.monsterHealthBar + '%'}"></div>
     </div>
-    <p>{{monsters[0].currentHP}} / {{monsters[0].maxHP}} </p>
+    <p> {{currentMonster.currentHP}} / {{currentMonster.maxHP}} </p>
   </div>
 </template>
 
 <script>
 export default {
   name: "Monster",
-  props: ["monsters"]
+  props: ["currentMonster", "monsters"],
+  computed: {
+    monsterHealthBar() {
+      return Math.round(( this.currentMonster.currentHP / this.currentMonster.maxHP ) * 100);
+    }
+  }
 }
 </script>
 
