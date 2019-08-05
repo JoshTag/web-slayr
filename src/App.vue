@@ -1,12 +1,14 @@
 <template>
   <div id="app">
-    <Monster v-bind:currentMonster="currentMonster" :monsters="monsters" />
-    <Player v-bind:player="player" :currentPlayer="currentPlayer" />
+    <Monster v-bind:gameData="gameData" :currentMonster="currentMonster"/>
+    <Player v-bind:gameData="gameData" :currentPlayer="currentPlayer"/>
     <Controls
       v-on:atk-method="basicAtk"
       v-on:doubleAtk-method="doubleAtk"
       v-on:healthPot-method="healthPot"
       v-on:setMonsterLvl-method="setMonsterLvl"
+      v-on:specialAtk-method="specialAtk"
+      v-on:restart-method="restartGame"
     />
     <BattleLog v-bind:battleLog="battleLog" />
   </div>
@@ -17,6 +19,7 @@ import Monster from "./components/Monster";
 import Player from "./components/Player";
 import Controls from "./components/Controls";
 import BattleLog from "./components/BattleLog";
+import initialData from "./Data/InitialData";
 import { setTimeout } from "timers";
 
 export default {
@@ -27,111 +30,106 @@ export default {
     Controls,
     BattleLog
   },
+  props: ["initialData"],
   data() {
     return {
-      battleLog: [],
+      battleLog: ["hello"],
       currentLvl: 1,
       currentMonster: {},
       currentPlayer: {},
-      player: {
-        lvl: 1,
-        currentHP: 100,
-        maxHP: 100,
-        hpPot: 5,
-        atkPot: 5,
-        quickAtk: 3,
-        specialAtk: 1
-      },
-      monsters: [
-        {
-          lvl: 1,
-          name: "Monster Uno",
-          currentHP: 100,
-          maxHP: 100,
-          attack: 15
-        },
-        {
-          lvl: 2,
-          name: "Durian Databaser",
-          currentHP: 110,
-          maxHP: 120,
-          attack: 20
-        },
-        {
-          lvl: 3,
-          name: "Salty P",
-          currentHP: 150,
-          maxHP: 150,
-          attack: 30
-        }
-      ]
+      gameData: initialData
     };
   },
   methods: {
     setMonsterLvl() {
-      this.currentMonster = this.monsters[0];
-      console.log("set monster level");
+      this.currentMonster = this.gameData.data.monsters[0];
+      this.currentPlayer = this.gameData.data.player[0];
+
     },
     monsterAtk() {
-      if (this.monsters[0].currentHP <= 0) {
-        this.monsters[0].currentHP = 0;
-        this.battleLog.push(`${this.monsters[0].name} DED`);
+      if (this.currentMonster.currentHP <= 0) {
+        this.currentMonster.currentHP = 0;
+        this.battleLog.push(`${this.currentMonster.name} DED`);
         this.setMonsterLvl();
       } else {
         setTimeout(() => {
-          this.player.currentHP -= this.monsters[0].attack;
-          console.log("player", this.player.currentHP);
+          this.currentPlayer.currentHP -= this.currentMonster.attack;
+          console.log("player", this.currentPlayer.currentHP);
           this.battleLog.push(`you've been attacked `);
-          if (this.player.currentHP <= 0) {
-            this.player.currentHP = 0;
+          if (this.currentPlayer.currentHP <= 0) {
+            this.currentPlayer.currentHP = 0;
             this.battleLog.push(`U DED!`);
           }
         }, 500);
       }
     },
     basicAtk() {
-      this.monsters[0].currentHP -= 10;
-      console.log("monster", this.monsters[0].currentHP);
-      this.battleLog.push(`you've attacked for ${10} damage`);
+      this.currentMonster.currentHP -= this.currentPlayer.attack;
+      console.log("monster", this.currentMonster.currentHP);
+      this.battleLog.push(
+        `you've attacked for ${this.currentPlayer.attack} damage`
+      );
 
       this.monsterAtk();
     },
     doubleAtk() {
-      if (this.player.quickAtk > 0) {
-        this.monsters[0].currentHP -= 8;
+      if (this.currentPlayer.dblAtkLeft > 0) {
+        this.currentMonster.currentHP -= this.currentPlayer.dblAtk;
 
         setTimeout(() => {
-          this.monsters[0].currentHP -= 8;
+          this.currentMonster.currentHP -= this.currentPlayer.dblAtk;
         }, 300);
-        console.log("monster", this.monsters[0].currentHP);
+        console.log("monster", this.currentMonster.currentHP);
 
         this.monsterAtk();
-        this.player.quickAtk -= 1;
+        this.currentPlayer.dblAtkLeft -= 1;
 
-        console.log(this.player.quickAtk);
+        console.log(this.currentPlayer.dblAtkLeft);
 
-        this.battleLog.push(`you've attacked twice for 7 damamge each`);
+        this.battleLog.push(
+          `you've attacked twice for ${this.currentPlayer.dblAtk} damage each`
+        );
       } else {
         this.battleLog.push(
           `you've used the maximum number of double attacks this turn`
         );
       }
     },
+    specialAtk() {
+      if (this.currentPlayer.spcAtkLeft <= 1 ) {
+      this.currentMonster.currentHP -= this.currentPlayer.specialAtk;
+      this.currentPlayer.spcAtkLeft -= 1;
+      console.log("monster", this.currentMonster.currentHP);
+      this.battleLog.push(
+        `you've attacked for ${this.currentPlayer.specialAtk} damage`
+      );
+
+      this.monsterAtk();
+      } else {
+        this.battleLog.push("You Cannot use this move anymore")
+      }
+    },
     healthPot() {
       if (
-        this.player.currentHP <= this.player.maxHP - 20 &&
-        this.player.hpPot > 0
+        this.currentPlayer.currentHP <= this.currentPlayer.maxHP - 20 &&
+        this.currentPlayer.hpPot > 0
       ) {
-        this.player.currentHP += 20;
-        this.player.hpPot -= 1;
-        console.log(this.player.currentHP);
-        console.log(this.player.hpPot);
+        this.currentPlayer.currentHP += 20;
+        this.currentPlayer.hpPot -= 1;
+        console.log(this.currentPlayer.currentHP);
+        console.log(this.currentPlayer.hpPot);
         this.battleLog.push(`you healed for 20 HP`);
       } else {
         this.battleLog.push(`you cannot use this item`);
       }
     },
-    attackPot() {}
+    restartGame() {
+
+        // Object.assign(this.$data, reset());
+    
+
+      console.log(initialData)
+    }
   }
 };
 </script>

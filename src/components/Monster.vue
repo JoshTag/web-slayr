@@ -12,7 +12,7 @@
 <script>
 export default {
   name: "Monster",
-  props: ["currentMonster", "monsters"],
+  props: [ "currentMonster", "monsters", "gameData" ],
   computed: {
     monsterHealthBar() {
       return Math.round(( this.currentMonster.currentHP / this.currentMonster.maxHP ) * 100);

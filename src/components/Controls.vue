@@ -3,8 +3,9 @@
     <button @click="$emit('atk-method')">Attack</button>
     <button @click="$emit('doubleAtk-method')">Double Attack</button>
     <button @click="$emit('healthPot-method')">Health Potion</button>
-    <button>Attack Potion</button>
+    <button @click="$emit('specialAtk-method')">Special Attack</button>
     <button @click="$emit('setMonsterLvl-method')">start</button>
+    <!-- <button @click="$emit('restart-method')">restart</button> -->
   </div>
 </template>
 
