@@ -7,12 +7,33 @@ export default {
         currentHP: 100,
         maxHP: 100,
         attack: 10,
-        dblAtk: 8,
+        dblAtk: 10,
         dblAtkLeft: 3,
         specialAtk: 25,
         spcAtkLeft: 1,
         hpPot: 3
-      }
+      },
+      {
+        lvl: 2,
+        currentHP: 150,
+        maxHP: 150,
+        attack: 15,
+        dblAtk: 12,
+        dblAtkLeft: 3,
+        specialAtk: 30,
+        spcAtkLeft: 1,
+        hpPot: 4
+      },
+      {
+        lvl: 3,
+        currentHP: 200,
+        maxHP: 200,
+        dblAtk: 15,
+        dblAtkLeft: 3,
+        specialAtk: 35,
+        spcAtkLeft: 1,
+        hpPot: 5
+      },
     ],
     monsters: [
       {
@@ -20,21 +41,20 @@ export default {
         name: "Monster ONE",
         currentHP: 100,
         maxHP: 100,
-        attack: 15
+        attack: 20
       },
       {
         lvl: 2,
         name: "Monster Two",
-        currentHP: 120,
-        maxHP: 120,
-        attack: 20
-      },
-      {
-        lvl: 3,
-        name: "Salty P",
         currentHP: 150,
         maxHP: 150,
         attack: 30
+      },
+{
+        lvl: 3,
+        name: "Monster three",
+        currentHP: 200,
+        maxHP: 200
       }
     ]
   }

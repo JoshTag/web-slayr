@@ -1,14 +1,13 @@
 <template>
   <div id="app">
-    <Monster v-bind:gameData="gameData" :currentMonster="currentMonster"/>
-    <Player v-bind:gameData="gameData" :currentPlayer="currentPlayer"/>
+    <Monster v-bind:gameData="gameData" :currentMonster="currentMonster" />
+    <Player v-bind:gameData="gameData" :currentPlayer="currentPlayer" />
     <Controls
       v-on:atk-method="basicAtk"
       v-on:doubleAtk-method="doubleAtk"
       v-on:healthPot-method="healthPot"
       v-on:setMonsterLvl-method="setMonsterLvl"
       v-on:specialAtk-method="specialAtk"
-      v-on:restart-method="restartGame"
     />
     <BattleLog v-bind:battleLog="battleLog" />
   </div>
@@ -20,7 +19,9 @@ import Player from "./components/Player";
 import Controls from "./components/Controls";
 import BattleLog from "./components/BattleLog";
 import initialData from "./Data/InitialData";
+import randomDamage from "./Data/RandomDamage";
 import { setTimeout } from "timers";
+import { constants } from "crypto";
 
 export default {
   name: "app",
@@ -30,22 +31,17 @@ export default {
     Controls,
     BattleLog
   },
-  props: ["initialData"],
   data() {
     return {
-      battleLog: ["hello"],
+      battleLog: [],
       currentLvl: 1,
+      inreasedAtk: 40,
       currentMonster: {},
       currentPlayer: {},
-      gameData: initialData
+      gameData: initialData.data
     };
   },
   methods: {
-    setMonsterLvl() {
-      this.currentMonster = this.gameData.data.monsters[0];
-      this.currentPlayer = this.gameData.data.player[0];
-
-    },
     monsterAtk() {
       if (this.currentMonster.currentHP <= 0) {
         this.currentMonster.currentHP = 0;
@@ -53,24 +49,86 @@ export default {
         this.setMonsterLvl();
       } else {
         setTimeout(() => {
-          this.currentPlayer.currentHP -= this.currentMonster.attack;
-          console.log("player", this.currentPlayer.currentHP);
-          this.battleLog.push(`you've been attacked `);
-          if (this.currentPlayer.currentHP <= 0) {
-            this.currentPlayer.currentHP = 0;
-            this.battleLog.push(`U DED!`);
+          if (this.currentMonster.lvl === 3) {
+            this.monsterAtkThree();
+          } else if (this.currentMonster.lvl === 4) {
+            this.monsterAtkFour();
+          } else {
+            this.currentPlayer.currentHP -= this.currentMonster.attack;
+            console.log("player", this.currentPlayer.currentHP);
+            this.battleLog.push(
+              `you've been attacked for ${this.currentMonster.attack}`
+            );
+            if (this.currentPlayer.currentHP <= 0) {
+              this.currentPlayer.currentHP = 0;
+              this.battleLog.push(`U DED!`);
+            }
           }
         }, 500);
       }
     },
+    monsterAtkThree() {
+      let damage = randomDamage.randomDamage;
+      let attackRandom = damage[Math.floor(Math.random() * damage.length)];
+
+      this.currentPlayer.currentHP -= attackRandom;
+      console.log("player", this.currentPlayer.currentHP);
+      this.battleLog.push(`you've been attacked for ${attackRandom}`);
+
+      if (this.currentPlayer.currentHP <= 0) {
+        this.currentPlayer.currentHP = 0;
+        this.battleLog.push(`U DED!`);
+      }
+    },
+    monsterAtkFour() {
+      let attack = (this.inreasedAtk += 10);
+
+      this.currentPlayer.currentHP -= attack;
+      this.battleLog.push(`you've been attacked for ${attack}`);
+
+      if (this.currentPlayer.currentHP <= 0) {
+        this.currentPlayer.currentHP = 0;
+        this.battleLog.push(`U DED!`);
+      }
+    },
     basicAtk() {
-      this.currentMonster.currentHP -= this.currentPlayer.attack;
-      console.log("monster", this.currentMonster.currentHP);
-      this.battleLog.push(
-        `you've attacked for ${this.currentPlayer.attack} damage`
-      );
+      if (this.currentPlayer.lvl === 3) {
+        this.basicAtkThree();
+      }
+      if (this.currentPlayer.lvl === 4) {
+        this.basicAtkFour();
+      } else {
+        this.currentMonster.currentHP -= this.currentPlayer.attack;
+        console.log("monster", this.currentMonster.currentHP);
+        this.battleLog.push(
+          `you've attacked for ${this.currentPlayer.attack} damage`
+        );
+      }
 
       this.monsterAtk();
+    },
+    basicAtkThree() {
+      let damageRange = [
+        20, 21, 22, 23, 24, 25, 25, 25, 25, 25, 26, 27, 28, 29, 30
+      ];
+      let attackRandom =
+        damageRange[Math.floor(Math.random() * damageRange.length)];
+
+      this.currentMonster.currentHP -= attackRandom;
+      console.log("monster", this.currentMonster.currentHP);
+      this.battleLog.push(`you've attacked for ${attackRandom} damage`);
+    },
+    basicAtkFour() {
+      let DamageMiss = [0, 35];
+      let attackRandom =
+        DamageMiss[Math.floor(Math.random() * DamageMiss.length)];
+
+      this.currentMonster.currentHP -= attackRandom;
+
+      let message =
+        attackRandom === 0
+          ? this.battleLog.push("You missed!")
+          : this.battleLog.push(`you've attacked for ${attackRandom} damage`);
     },
     doubleAtk() {
       if (this.currentPlayer.dblAtkLeft > 0) {
@@ -96,17 +154,17 @@ export default {
       }
     },
     specialAtk() {
-      if (this.currentPlayer.spcAtkLeft <= 1 ) {
-      this.currentMonster.currentHP -= this.currentPlayer.specialAtk;
-      this.currentPlayer.spcAtkLeft -= 1;
-      console.log("monster", this.currentMonster.currentHP);
-      this.battleLog.push(
-        `you've attacked for ${this.currentPlayer.specialAtk} damage`
-      );
+      if (this.currentPlayer.spcAtkLeft >= 1) {
+        this.currentMonster.currentHP -= this.currentPlayer.specialAtk;
+        this.currentPlayer.spcAtkLeft -= 1;
+        console.log("monster", this.currentMonster.currentHP);
+        this.battleLog.push(
+          `you've attacked for ${this.currentPlayer.specialAtk} damage`
+        );
 
-      this.monsterAtk();
+        this.monsterAtk();
       } else {
-        this.battleLog.push("You Cannot use this move anymore")
+        this.battleLog.push("You cannot use this move anymore");
       }
     },
     healthPot() {
@@ -123,13 +181,31 @@ export default {
         this.battleLog.push(`you cannot use this item`);
       }
     },
-    restartGame() {
+    setMonsterLvl() {
+      //  this.currentMonster = this.gameData.monsters[2];
+      //  this.currentPlayer = this.gameData.player[2];
 
-        // Object.assign(this.$data, reset());
-    
-
-      console.log(initialData)
+      this.currentPlayer = {
+        lvl: 4,
+        currentHP: 400,
+        maxHP: 400,
+        dblAtk: 18,
+        dblAtkLeft: 3,
+        specialAtk: 50,
+        spcAtkLeft: 1,
+        hpPot: 5
+      };
+      this.currentMonster = {
+        lvl: 4,
+        name: "Monster four",
+        currentHP: 400,
+        maxHP: 400
+      };
     }
+    // restartGame() {
+    //   this.gameData =
+    // }
+    // }
   }
 };
 </script>
