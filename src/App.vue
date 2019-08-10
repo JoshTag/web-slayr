@@ -19,7 +19,6 @@ import Player from "./components/Player";
 import Controls from "./components/Controls";
 import BattleLog from "./components/BattleLog";
 import initialData from "./Data/InitialData";
-import randomDamage from "./Data/RandomDamage";
 import { setTimeout } from "timers";
 import { constants } from "crypto";
 
@@ -35,7 +34,8 @@ export default {
     return {
       battleLog: [],
       currentLvl: 1,
-      inreasedAtk: 40,
+      increaseLvlFour: 80,
+      increaseLvlsix: 300,
       currentMonster: {},
       currentPlayer: {},
       gameData: initialData.data
@@ -53,22 +53,28 @@ export default {
             this.monsterAtkThree();
           } else if (this.currentMonster.lvl === 4) {
             this.monsterAtkFour();
+          } else if (this.currentMonster.lvl === 5) {
+            this.monsterAtkFive();
+          } else if (this.currentMonster.lvl === 6) {
+            this.monsterAtkSix();
           } else {
             this.currentPlayer.currentHP -= this.currentMonster.attack;
             console.log("player", this.currentPlayer.currentHP);
             this.battleLog.push(
               `you've been attacked for ${this.currentMonster.attack}`
             );
+
+            // put in check if player ded function
             if (this.currentPlayer.currentHP <= 0) {
               this.currentPlayer.currentHP = 0;
               this.battleLog.push(`U DED!`);
             }
           }
-        }, 500);
+        }, 300);
       }
     },
     monsterAtkThree() {
-      let damage = randomDamage.randomDamage;
+      let damage = [60, 60, 60, 60, 60, 60, 60, 60, 100, 150];
       let attackRandom = damage[Math.floor(Math.random() * damage.length)];
 
       this.currentPlayer.currentHP -= attackRandom;
@@ -81,7 +87,7 @@ export default {
       }
     },
     monsterAtkFour() {
-      let attack = (this.inreasedAtk += 10);
+      let attack = (this.increaseLvlFour += 20);
 
       this.currentPlayer.currentHP -= attack;
       this.battleLog.push(`you've been attacked for ${attack}`);
@@ -91,12 +97,150 @@ export default {
         this.battleLog.push(`U DED!`);
       }
     },
+    monsterAtkFive() {
+      let attackMethods = [1, 2, 3];
+      let method =
+        attackMethods[Math.floor(Math.random() * attackMethods.length)];
+
+      if (method === 1) {
+      this.attackLoop(50);
+        console.log("attack one");
+      } else if (method === 2) {
+        this.attackHeal(200, 2500);
+        console.log("attack two");
+      } else {
+        this.attackHealth(200, .4);
+        console.log("attack tree");
+      }
+    },
+    monsterAtkSix() {
+      let attackMethods = [1, 2, 3, 4];
+      let method =
+        attackMethods[Math.floor(Math.random() * attackMethods.length)];
+
+      if (method === 1) {
+        this.attackLoop(100);
+        console.log("attack one");
+      } else if (method === 2) {
+        this.attackHeal(500, 5000);
+        console.log("attack two");
+      } else {
+        this.attackHealth(500, 0.75);
+        console.log("attack tree");
+      }
+    },
+    attackHealth(dmgFloor, percent) {
+      let attackDamage =
+        (this.currentMonster.maxHP - this.currentMonster.currentHP) * percent;
+
+      let roundedDamage = Math.round(attackDamage);
+
+      this.currentPlayer.currentHP -=
+        roundedDamage < dmgFloor ? dmgFloor : roundedDamage;
+      console.log(
+        "ATTACK!",
+        roundedDamage < dmgFloor ? dmgFloor : roundedDamage
+      );
+    },
+    attackHeal(dmgHeal, hpReset) {
+      this.currentPlayer.currentHP -= dmgHeal;
+
+      if (
+        this.currentMonster.currentHP <=
+        this.currentMonster.maxHP - dmgHeal
+      ) {
+        this.currentMonster.currentHP += dmgHeal;
+      } else {
+        this.currentMonster.currentHP = hpReset;
+      }
+    },
+    attackLoop(dmg) {
+      setTimeout(() => {
+        this.currentPlayer.currentHP -= dmg;
+        setTimeout(() => {
+          this.currentPlayer.currentHP -= dmg;
+          setTimeout(() => {
+            this.currentPlayer.currentHP -= dmg;
+            setTimeout(() => {
+              this.currentPlayer.currentHP -= dmg;
+              setTimeout(() => {
+                this.currentPlayer.currentHP -= dmg;
+                setTimeout(() => {
+                  this.currentPlayer.currentHP -= dmg;
+                  setTimeout(() => {
+                    this.currentPlayer.currentHP -= dmg;
+                    setTimeout(() => {
+                      this.currentPlayer.currentHP -= dmg;
+                      setTimeout(() => {
+                        this.currentPlayer.currentHP -= dmg;
+                        setTimeout(() => {
+                          this.currentPlayer.currentHP -= dmg;
+                        }, 100);
+                      }, 100);
+                    }, 100);
+                  }, 100);
+                }, 100);
+              }, 100);
+            }, 100);
+          }, 100);
+        }, 100);
+      }, 100);
+
+      if (this.currentPlayer.currentHP <= 0) {
+        this.currentPlayer.currentHP = 0;
+        this.battleLog.push(`U DED!`);
+      }
+    },
+    // attackPromise(){
+    //   return new Promise(function(res, rej) {
+    //       this.attackLoop();
+    //   })
+    // },
+    // attackLoop() {
+    //   setTimeout(() => {
+    //     this.currentPlayer.currentHP -= 50;
+    //   }, 100);
+    //   setTimeout(() => {
+    //     this.currentPlayer.currentHP -= 50;
+    //   }, 200);
+    //   setTimeout(() => {
+    //     this.currentPlayer.currentHP -= 50;
+    //   }, 300);
+    //   setTimeout(() => {
+    //     this.currentPlayer.currentHP -= 50;
+    //   }, 400);
+    //   setTimeout(() => {
+    //     this.currentPlayer.currentHP -= 50;
+    //   }, 500);
+    //   setTimeout(() => {
+    //     this.currentPlayer.currentHP -= 50;
+    //   }, 600);
+    //   setTimeout(() => {
+    //     this.currentPlayer.currentHP -= 50;
+    //   }, 700);
+    //   setTimeout(() => {
+    //     this.currentPlayer.currentHP -= 50;
+    //   }, 800);
+    //   setTimeout(() => {
+    //     this.currentPlayer.currentHP -= 50;
+    //   }, 900);
+    //   setTimeout(() => {
+    //     this.currentPlayer.currentHP -= 50;
+    //   }, 1000);
+
+    //   if (this.currentPlayer.currentHP <= 0) {
+    //     this.currentPlayer.currentHP = 0;
+    //     this.battleLog.push(`U DED!`); }
+    // },
     basicAtk() {
       if (this.currentPlayer.lvl === 3) {
         this.basicAtkThree();
-      }
-      if (this.currentPlayer.lvl === 4) {
+      } else if (this.currentPlayer.lvl === 4) {
         this.basicAtkFour();
+      } else if (this.currentPlayer.lvl === 5) {
+        this.basicAtkFive();
+      } else if (this.currentPlayer.lvl === 6) {
+        this.basicAtkSix();
       } else {
         this.currentMonster.currentHP -= this.currentPlayer.attack;
         console.log("monster", this.currentMonster.currentHP);
@@ -108,9 +252,7 @@ export default {
       this.monsterAtk();
     },
     basicAtkThree() {
-      let damageRange = [
-        20, 21, 22, 23, 24, 25, 25, 25, 25, 25, 26, 27, 28, 29, 30
-      ];
+      let damageRange = [1, 50, 50, 50, 50];
       let attackRandom =
         damageRange[Math.floor(Math.random() * damageRange.length)];
 
@@ -119,16 +261,32 @@ export default {
       this.battleLog.push(`you've attacked for ${attackRandom} damage`);
     },
     basicAtkFour() {
-      let DamageMiss = [0, 35];
+      let DamageMiss = [0, 0, 75, 75, 75];
       let attackRandom =
         DamageMiss[Math.floor(Math.random() * DamageMiss.length)];
 
       this.currentMonster.currentHP -= attackRandom;
 
       let message =
-        attackRandom === 0
+        attackRandom === 1
           ? this.battleLog.push("You missed!")
           : this.battleLog.push(`you've attacked for ${attackRandom} damage`);
+    },
+    basicAtkFive() {
+      let DamageMiss = [1, 250];
+      let attackRandom =
+        DamageMiss[Math.floor(Math.random() * DamageMiss.length)];
+
+      this.currentMonster.currentHP -= attackRandom = 1
+        ? attackRandom
+        : attackRandom / 2;
+    },
+    basicAtkSix() {
+      let DamageMiss = [1, 400, 400];
+      let attackRandom =
+        DamageMiss[Math.floor(Math.random() * DamageMiss.length)];
+
+      this.currentMonster.currentHP -= attackRandom;
     },
     doubleAtk() {
       if (this.currentPlayer.dblAtkLeft > 0) {
@@ -168,43 +326,55 @@ export default {
       }
     },
     healthPot() {
+      if (this.currentPlayer.lvl === 3) {
+        this.hpVariable(150);
+      } else if (this.currentPlayer.lvl === 4) {
+        this.hpVariable(300);
+      } else if (this.currentPlayer.lvl === 5) {
+        this.hpVariable(500);
+      } else if (this.currentPlayer.lvl === 6) {
+        this.hpVariable(800);
+      } else {
+        this.hpVariable(20);
+      }
+    },
+    hpVariable(healing) {
       if (
-        this.currentPlayer.currentHP <= this.currentPlayer.maxHP - 20 &&
+        this.currentPlayer.currentHP <= this.currentPlayer.maxHP - healing &&
         this.currentPlayer.hpPot > 0
       ) {
-        this.currentPlayer.currentHP += 20;
+        this.currentPlayer.currentHP += healing;
         this.currentPlayer.hpPot -= 1;
         console.log(this.currentPlayer.currentHP);
         console.log(this.currentPlayer.hpPot);
-        this.battleLog.push(`you healed for 20 HP`);
+        this.battleLog.push(`you healed for ${healing} HP`);
       } else {
         this.battleLog.push(`you cannot use this item`);
       }
     },
     setMonsterLvl() {
-      //  this.currentMonster = this.gameData.monsters[2];
-      //  this.currentPlayer = this.gameData.player[2];
+      this.currentMonster = this.gameData.monsters[5];
+      this.currentPlayer = this.gameData.player[5];
 
-      this.currentPlayer = {
-        lvl: 4,
-        currentHP: 400,
-        maxHP: 400,
-        dblAtk: 18,
-        dblAtkLeft: 3,
-        specialAtk: 50,
-        spcAtkLeft: 1,
-        hpPot: 5
-      };
-      this.currentMonster = {
-        lvl: 4,
-        name: "Monster four",
-        currentHP: 400,
-        maxHP: 400
-      };
+      // this.currentPlayer = {
+      //   lvl: 6,
+      //   currentHP: 5000,
+      //   maxHP: 5000,
+      //   dblAtk: 250,
+      //   dblAtkLeft: 5,
+      //   specialAtk: 800,
+      //   spcAtkLeft: 1,
+      //   hpPot: 20
+      // };
+      // this.currentMonster = {
+      //   lvl: 6,
+      //   name: "Monster six",
+      //   currentHP: 5000,
+      //   maxHP: 5000
+      // };
     }
-    // restartGame() {
-    //   this.gameData =
-    // }
+    // setGameData() {
+    //   this.gameData = initialData.data
     // }
   }
 };
