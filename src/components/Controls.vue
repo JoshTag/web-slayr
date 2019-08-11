@@ -4,8 +4,10 @@
     <button @click="$emit('doubleAtk-method')">Double Attack</button>
     <button @click="$emit('healthPot-method')">Health Potion</button>
     <button @click="$emit('specialAtk-method')">Special Attack</button>
-    <button @click="$emit('setMonsterLvl-method')">start</button>
-    <!-- <button @click="$emit('restart-method')">restart</button> -->
+    <button @click="$emit('reset-method')">Start Game</button>
+
+    <!-- Uncomment to test attack methods -->
+    <!-- <button @click="$emit('setMonsterLvl-method')">start</button> -->
   </div>
 </template>
 

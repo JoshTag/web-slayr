@@ -4,6 +4,7 @@ export default {
     player: [
       {
         lvl: 1,
+        name: "Bootcamp Student",
         currentHP: 100,
         maxHP: 100,
         attack: 10,
@@ -15,6 +16,7 @@ export default {
       },
       {
         lvl: 2,
+        name: "Junior Dev",
         currentHP: 200,
         maxHP: 200,
         attack: 25,
@@ -26,6 +28,7 @@ export default {
       },
       {
         lvl: 3,
+        name: "Senior Dev",
         currentHP: 500,
         maxHP: 500,
         dblAtk: 25,
@@ -36,6 +39,7 @@ export default {
       },
       {
         lvl: 4,
+        name: "Full-Stack Dev",
         currentHP: 1000,
         maxHP: 1000,
         dblAtk: 40,
@@ -46,6 +50,7 @@ export default {
       },
       {
         lvl: 5,
+        name: "Product Manager",
         currentHP: 2500,
         maxHP: 2500,
         dblAtk: 150,
@@ -56,9 +61,10 @@ export default {
       },
       {
         lvl: 6,
+        name: "Super Coder",
         currentHP: 5000,
         maxHP: 5000,
-        dblAtk: 300,
+        dblAtk: 250,
         dblAtkLeft: 5,
         specialAtk: 800,
         spcAtkLeft: 1,
@@ -68,14 +74,14 @@ export default {
     monsters: [
       {
         lvl: 1,
-        name: "Monster ONE",
+        name: "The Merge Conflictor",
         currentHP: 100,
         maxHP: 100,
         attack: 20
       },
       {
         lvl: 2,
-        name: "Monster Two",
+        name: "The Failed to Compiler",
         currentHP: 200,
         maxHP: 200,
         attack: 40
@@ -88,19 +94,20 @@ export default {
       },
       {
         lvl: 4,
-        name: "Monster four",
+        name: "The Great Databaser",
         currentHP: 1000,
-        maxHP: 1000
+        maxHP: 1000,
+        increaseAtkBase: 80
       },
       {
         lvl: 5,
-        name: "Monster five",
+        name: "Spicy P",
         currentHP: 2500,
         maxHP: 2500
       },
       {
         lvl: 6,
-        name: "Monster six",
+        name: "Salty P",
         currentHP: 5000,
         maxHP: 5000
       }

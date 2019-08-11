@@ -1,18 +1,18 @@
 <template>
   <div>
-    <h2>Player</h2>
+    <h2>{{ currentPlayer.name }}</h2>
 
     <div id="player-health">
       <div v-bind:style="{width: playerHealthBar + '%'}"></div>
     </div>
-      <p > {{currentPlayer.currentHP}} / {{currentPlayer.maxHP}} </p>
+    <p > {{currentPlayer.currentHP}} / {{currentPlayer.maxHP}} </p>
   </div>
 </template>
 
 <script>
 export default {
   name: "Player",
-  props: [ "currentPlayer", "player" ],
+  props: [ "currentPlayer" ],
   computed: {
     playerHealthBar() {
       return Math.round(( this.currentPlayer.currentHP / this.currentPlayer.maxHP ) * 100);
