@@ -4,6 +4,7 @@
       <h2>YOU DED!</h2>
       <button @click="$emit('gameResetModal-method')">restart</button>
     </modal>
+    
     <modal name="monster-dead">
       <h2>YOU HAVE DEFEATED SALTY P!!</h2>
       <p>Play Again?</p>

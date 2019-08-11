@@ -1,19 +1,26 @@
 <template>
   <div id="app">
-    <button class="start-btn" v-on:click="setGameData" v-if="!startGame">Start Game</button>
-    <Monster v-bind:gameData="gameData" :currentMonster="currentMonster" v-if="startGame" />
-    <Player v-bind:gameData="gameData" :currentPlayer="currentPlayer" v-if="startGame" />
-    <Controls
-      v-on:atk-method="basicAtk"
-      v-on:doubleAtk-method="doubleAtk"
-      v-on:healthPot-method="healthPot"
-      v-on:setMonsterLvl-method="setMonsterLvl"
-      v-on:specialAtk-method="specialAtk"
-      v-on:reset-method="setGameData"
-      v-on:show-method="showDeadModal"
-      v-if="startGame"
-    />
-    <BattleLog v-bind:battleLog="battleLog" v-if="startGame" />
+    <div class="homescreen" v-on:click="setGameData" v-if="!startGame">
+      <img class="homescreen__logo-img" src="./assets/logo.png" alt="logo" />
+      <button class="homescreen__start-btn">Start Game</button>
+    </div>
+    <div class="main" v-if="startGame">
+      <BattleLog class="main__battlelog" v-bind:battleLog="battleLog" />
+      <BattleStats class="main__battlestats" v-bind:currentMonster="currentMonster" :currentPlayer="currentPlayer"  />
+      <div class="main__health-containers">
+        <Monster v-bind:currentMonster="currentMonster" />
+        <Player v-bind:currentPlayer="currentPlayer" />
+      </div>
+      <Controls
+        v-on:atk-method="basicAtk"
+        v-on:doubleAtk-method="doubleAtk"
+        v-on:healthPot-method="healthPot"
+        v-on:setMonsterLvl-method="setMonsterLvl"
+        v-on:specialAtk-method="specialAtk"
+        v-on:reset-method="setGameData"
+        v-on:show-method="showDeadModal"
+      />
+    </div>
     <Modals v-on:gameResetModal-method="gameResetModal" />
   </div>
 </template>
@@ -23,6 +30,7 @@ import Monster from "./components/Monster";
 import Player from "./components/Player";
 import Controls from "./components/Controls";
 import BattleLog from "./components/BattleLog";
+import BattleStats from './components/BattleStats'
 import Modals from "./components/Modals";
 import initialData from "./Data/InitialData";
 import { setTimeout } from "timers";
@@ -35,7 +43,8 @@ export default {
     Player,
     Controls,
     BattleLog,
-    Modals
+    Modals,
+    BattleStats
   },
   data() {
     return {
@@ -484,18 +493,77 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: #202030;
+  color: #fff;
   font-family: sans-serif;
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
-  background: #ebebd3;
+  background: url("./assets/cave-background.png");
+  background-size: 770px 100vh;
+  background-repeat: no-repeat;
+  background-color: black;
+
+  @media screen and (min-width: 600px) {
+    background-size: 100vw 80vh;
+  }
+}
+
+h2 {
+  font-size: 18px;
+  text-align: center;
+}
+
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__health-containers {
+    display: flex;
+    width: 300px;
+    margin: 0 auto 20px;
+
+    @media screen and (min-width: 600px) {
+      width: 600px;
+      justify-content: space-between;
+      margin: 0 auto 7vh;
+    }
+    
+    @media screen and (min-width: 1023px) {
+      width: 750px;
+      justify-content: space-between;
+      margin: 0 auto 5vh;
+    }
+  }
+}
+
+.homescreen {
+  width: 320px;
+  height: 80vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__start-btn {
+    background: #303841;
+    border: none;
+    width: 200px;
+    height: 70px;
+    font-size: 24px;
+  }
+
+  &__logo-img {
+    width: 100%;
+    margin-bottom: 50px;
+  }
 }
 </style>
