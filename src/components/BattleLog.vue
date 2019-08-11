@@ -18,7 +18,7 @@ export default {
   height: 120px;
   width: 320px;
   margin: 0 auto;
-  border: 2px solid rgba(0, 0, 0, .8);
+  border: 2px double rgba(0, 0, 0, .8);
   overflow: hidden;
   background: rgba($color: #000000, $alpha: .3);
 
@@ -28,7 +28,7 @@ export default {
   }
   @media screen and (min-width: 1023px) {
     width: 600px;
-    height: 25vh;
+    height: 20vh;
   }
 }
 

@@ -57,6 +57,9 @@ export default {
   width: 150px;
   height: 20px;
   border: 2px solid black;
+  @media screen and (min-width: 1023px) {
+    width: 200px;
+  }
 }
 
 #monster-health div {

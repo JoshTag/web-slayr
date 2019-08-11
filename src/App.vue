@@ -6,7 +6,11 @@
     </div>
     <div class="main" v-if="startGame">
       <BattleLog class="main__battlelog" v-bind:battleLog="battleLog" />
-      <BattleStats class="main__battlestats" v-bind:currentMonster="currentMonster" :currentPlayer="currentPlayer"  />
+      <BattleStats
+        class="main__battlestats"
+        v-bind:currentMonster="currentMonster"
+        :currentPlayer="currentPlayer"
+      />
       <div class="main__health-containers">
         <Monster v-bind:currentMonster="currentMonster" />
         <Player v-bind:currentPlayer="currentPlayer" />
@@ -30,7 +34,7 @@ import Monster from "./components/Monster";
 import Player from "./components/Player";
 import Controls from "./components/Controls";
 import BattleLog from "./components/BattleLog";
-import BattleStats from './components/BattleStats'
+import BattleStats from "./components/BattleStats";
 import Modals from "./components/Modals";
 import initialData from "./Data/InitialData";
 import { setTimeout } from "timers";
@@ -78,7 +82,6 @@ export default {
             this.monsterAtkSix();
           } else {
             this.currentPlayer.currentHP -= this.currentMonster.attack;
-            console.log("player", this.currentPlayer.currentHP);
             this.battleLog.push(
               `you've been attacked for ${this.currentMonster.attack}`
             );
@@ -92,7 +95,6 @@ export default {
       let attackRandom = damage[Math.floor(Math.random() * damage.length)];
 
       this.currentPlayer.currentHP -= attackRandom;
-      console.log("player", this.currentPlayer.currentHP);
       this.battleLog.push(`you've been attacked for ${attackRandom}`);
 
       this.checkLoss();
@@ -112,14 +114,13 @@ export default {
 
       if (method === 1) {
         this.attackLoop(50);
-        console.log("attack one");
       } else if (method === 2) {
         this.attackHeal(200, 2500);
-        console.log("attack two");
       } else {
         this.attackHealth(200, 0.4);
-        console.log("attack tree");
       }
+
+      this.checkLoss();
     },
     monsterAtkSix() {
       let attackMethods = [1, 2, 3, 4];
@@ -128,13 +129,10 @@ export default {
 
       if (method === 1) {
         this.attackLoop(100);
-        console.log("attack one");
       } else if (method === 2) {
         this.attackHeal(500, 5000);
-        console.log("attack two");
       } else {
         this.attackHealth(500, 0.75);
-        console.log("attack tree");
       }
 
       this.checkLoss();
@@ -147,6 +145,7 @@ export default {
 
       this.currentPlayer.currentHP -=
         roundedDamage < dmgFloor ? dmgFloor : roundedDamage;
+      this.battleLog.push(`You've been attacked for ${roundedDamage < dmgFloor ? dmgFloor : roundedDamage}`)
       this.checkLoss();
     },
     attackHeal(dmgHeal, hpReset) {
@@ -157,8 +156,10 @@ export default {
         this.currentMonster.maxHP - dmgHeal
       ) {
         this.currentMonster.currentHP += dmgHeal;
+        this.battleLog.push(`${this.currentMonster.name} has healed for ${dmgHeal}`)
       } else {
         this.currentMonster.currentHP = hpReset;
+        this.battleLog.push(`${this.currentMonster.name} has healed to full health`)
       }
       this.checkLoss();
     },
@@ -203,6 +204,7 @@ export default {
           }, 100);
         }, 100);
       }, 100);
+      this.battleLog.push(`You've been attacked for 500 damage`);
 
       if (this.currentPlayer.currentHP <= 0) {
         this.currentPlayer.currentHP = 0;
@@ -233,7 +235,6 @@ export default {
         damageRange[Math.floor(Math.random() * damageRange.length)];
 
       this.currentMonster.currentHP -= attackRandom;
-      console.log("monster", this.currentMonster.currentHP);
       this.battleLog.push(`you've attacked for ${attackRandom} damage`);
     },
     basicAtkFour() {
@@ -243,10 +244,9 @@ export default {
 
       this.currentMonster.currentHP -= attackRandom;
 
-      let message =
-        attackRandom === 1
+      let message = ( attackRandom === 0
           ? this.battleLog.push("You missed!")
-          : this.battleLog.push(`you've attacked for ${attackRandom} damage`);
+          : this.battleLog.push(`you've attacked for ${attackRandom} damage`));
     },
     basicAtkFive() {
       let DamageMiss = [1, 250];
@@ -256,6 +256,8 @@ export default {
       this.currentMonster.currentHP -= attackRandom = 1
         ? attackRandom
         : attackRandom / 2;
+
+      this.battleLog.push(`you've attacked for ${attackRandom} damage`);
     },
     basicAtkSix() {
       let DamageMiss = [1, 400, 400];
@@ -263,14 +265,11 @@ export default {
         DamageMiss[Math.floor(Math.random() * DamageMiss.length)];
 
       this.currentMonster.currentHP -= attackRandom;
+      this.battleLog.push(`you've attacked for ${attackRandom} damage`);
     },
     doubleAtk() {
       if (this.currentPlayer.dblAtkLeft > 0) {
-        this.currentMonster.currentHP -= this.currentPlayer.dblAtk;
-
-        setTimeout(() => {
-          this.currentMonster.currentHP -= this.currentPlayer.dblAtk;
-        }, 300);
+        this.currentMonster.currentHP -= this.currentPlayer.dblAtk * 2;
 
         this.monsterAtk();
         this.currentPlayer.dblAtkLeft -= 1;
@@ -348,20 +347,32 @@ export default {
       }
     },
     setMonsterLvl() {
-      let increaseLvl = this.currentLvl++;
-      this.currentMonster = this.gameData.monsters[increaseLvl];
-      this.currentPlayer = this.gameData.player[increaseLvl];
+      if (this.currentMonster.lvl === 5) {
+        let increaseLvl = this.currentLvl++;
+        this.currentMonster = this.gameData.monsters[increaseLvl];
+        this.currentPlayer = this.gameData.player[increaseLvl];
+        this.battleLog.push("SPICY P HAS TRANFORMED INTO SALTY P");
+      } else {
+        let increaseLvl = this.currentLvl++;
+        this.currentMonster = this.gameData.monsters[increaseLvl];
+        this.currentPlayer = this.gameData.player[increaseLvl];
+      }
     },
     setGameData() {
       this.startGame = true;
       this.currentLvl = 0;
-      this.battleLog = [];
+      this.battleLog = [
+        "You're just a new web developer looking through the caves of code. \
+        It is said that if you defeat all five code monsters, you yourself will become the greatest coder of all time!"
+      ];
       this.currentMonster = {
         lvl: 1,
         name: "The Merge Conflictor",
         currentHP: 100,
         maxHP: 100,
-        attack: 20
+        attack: 20,
+        description:
+          "The Merge Conflictor will attack you with merge conflicts for 20 damage each turn"
       };
       this.currentPlayer = {
         lvl: 1,
@@ -377,18 +388,6 @@ export default {
       };
       this.gameData = {
         player: [
-          {
-            lvl: 1,
-            name: "Bootcamp Student",
-            currentHP: 100,
-            maxHP: 100,
-            attack: 10,
-            dblAtk: 10,
-            dblAtkLeft: 3,
-            specialAtk: 25,
-            spcAtkLeft: 1,
-            hpPot: 3
-          },
           {
             lvl: 2,
             name: "Junior Dev",
@@ -448,43 +447,51 @@ export default {
         ],
         monsters: [
           {
-            lvl: 1,
-            name: "The Merge Conflictor",
-            currentHP: 100,
-            maxHP: 100,
-            attack: 20
-          },
-          {
             lvl: 2,
             name: "The Failed to Compiler",
             currentHP: 200,
             maxHP: 200,
-            attack: 40
+            attack: 40,
+            description:
+              "This monster will make throw failed to compile erros at you for 40 damage"
           },
           {
             lvl: 3,
-            name: "Monster three",
+            name: "The Haker",
             currentHP: 500,
-            maxHP: 500
+            maxHP: 500,
+            description:
+              "The hacker has a 80% chance to hack you for 60, damage \
+            10% chance for 100 damange, \
+            and 10% chance for 150 damage"
           },
           {
             lvl: 4,
-            name: "The Great Databaser",
+            name: "The Database Damager",
             currentHP: 1000,
             maxHP: 1000,
-            increaseAtkBase: 80
+            increaseAtkBase: 80,
+            description:
+              "This monster will inject you with SQL injections. \
+              It will attack you for 100 damage and each subsequent attack will increase by 20"
           },
           {
             lvl: 5,
             name: "Spicy P",
             currentHP: 2500,
-            maxHP: 2500
+            maxHP: 2500,
+            description:
+              "Spicy P is the ultimate web developer! It has three attacks. \
+            It will attack you with a for loop for a total of 500 damage. \
+            It will use a callback to attack you for 200 damage and heal for 200. \
+            Lastly it's DDoS attack will attack you for 40% of its missing health"
           },
           {
             lvl: 6,
             name: "Salty P",
             currentHP: 5000,
-            maxHP: 5000
+            maxHP: 5000,
+            description: "ITS SALTY AF!"
           }
         ]
       };
@@ -506,7 +513,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
   background: url("./assets/cave-background.png");
-  background-size: 770px 100vh;
+  background-size: 770px 90vh;
   background-repeat: no-repeat;
   background-color: black;
 
@@ -535,11 +542,11 @@ h2 {
       justify-content: space-between;
       margin: 0 auto 7vh;
     }
-    
+
     @media screen and (min-width: 1023px) {
       width: 750px;
       justify-content: space-between;
-      margin: 0 auto 5vh;
+      margin: 0 auto 4vh;
     }
   }
 }

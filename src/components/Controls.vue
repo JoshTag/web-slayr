@@ -38,6 +38,10 @@ export default {
     width: 400px;
   }
 
+  @media screen and (min-width: 1023px) {
+    height: 20vh;
+  }
+
   &__btn {
     height: 30px;
     width: 125px;

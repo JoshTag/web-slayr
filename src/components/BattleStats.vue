@@ -5,7 +5,7 @@
       <p>Special Attack: {{ currentPlayer.spcAtkLeft}}</p>
       <p>HP Potions Left: {{ currentPlayer.hpPot}}</p>
     </div>
-    <p>Current Monster: {{ currentMonster.lvl }}</p>
+    <p class="description">{{ currentMonster.description }}</p>
   </div>
 </template>
 
@@ -22,18 +22,21 @@ export default {
   margin: 0 auto auto;
 
   @media screen and (min-width: 600px) {
-    width: 400px;
-  }
-
-  @media screen and (min-width: 1023px) {
     width: 500px;
   }
 
-  &__stats {
-    @media screen and (min-width: 600px) {
-      display: flex;
-      justify-content: space-between;
-    }
+  @media screen and (min-width: 1023px) {
+    width: 600px;
   }
+
+  &__stats {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+  }
+}
+.description {
+  font-size: 14px;
+  padding-top: 10px;
 }
 </style>
