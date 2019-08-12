@@ -47,10 +47,11 @@ export default {
     width: 125px;
     background: #303841;
     border: none;
+    margin-bottom: 5px;
 
     @media screen and (min-width: 600px) {
       width: 100%;
-      margin-top: 5px;
+      margin: 5px 0 0;
     }
   }
 
@@ -59,7 +60,7 @@ export default {
   }
 
   &__btn-restart {
-    height: 60px;
+    height: 65px;
     width: 125px;
     background: #303841;
     border: none;
