@@ -1,6 +1,6 @@
 <template>
   <div class="monster-container">
-    <h2>{{ currentMonster.name }}</h2>
+    <h2 class="monster-container__header">{{ currentMonster.name }}</h2>
     <div id="monster-health">
       <div v-bind:style="{width: this.monsterHealthBar + '%'}"></div>
     </div>
@@ -37,6 +37,21 @@ export default {
   @media screen and (min-width: 1023px) {
     width: 275px;
     height: 275px;
+  }
+
+  &__header {
+    height: 50px;
+    font-size: 16px;
+    vertical-align: text-bottom;
+
+    @media screen and (min-width: 600px) {
+      height: 25px;
+    }
+
+    @media screen and (min-width: 1023px) {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
   }
 
   &__img {

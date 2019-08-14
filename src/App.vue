@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <div class="homescreen" v-on:click="setGameData" v-if="!startGame">
+    <!-- uncomment to test modal -->
+    <!-- <button  v-on:click="showGameEnd">test</button>
+    <button  v-on:click="showDeadModal">test</button> -->
+    <div class="homescreen" v-if="!startGame">
       <img class="homescreen__logo-img" src="./assets/logo.png" alt="logo" />
-      <button class="homescreen__start-btn">Start Game</button>
+      <button class="homescreen__start-btn" v-on:click="setGameData">Start Game</button>
     </div>
     <div class="main" v-if="startGame">
       <BattleLog class="main__battlelog" v-bind:battleLog="battleLog" />
@@ -25,7 +28,7 @@
         v-on:show-method="showDeadModal"
       />
     </div>
-    <Modals v-on:gameResetModal-method="gameResetModal" />
+    <Modals v-on:gameResetModal-method="gameResetModal" v-on:gameEnd-method="gameEndModal" />
   </div>
 </template>
 
@@ -337,6 +340,10 @@ export default {
       this.hide();
       this.setGameData();
     },
+    gameEndModal() {
+      this.hideGameEnd();
+      this.setGameData();
+    },
     checkLoss() {
       if (this.currentPlayer.currentHP <= 0) {
         this.currentPlayer.currentHP = 0;
@@ -440,7 +447,7 @@ export default {
             maxHP: 5000,
             dblAtk: 250,
             dblAtkLeft: 5,
-            specialAtk: 3000,
+            specialAtk: 2000,
             spcAtkLeft: 1,
             hpPot: 20
           }
@@ -535,18 +542,18 @@ h2 {
   &__health-containers {
     display: flex;
     width: 300px;
-    margin: 0 auto 20px;
+    margin: 0 auto 10px;
 
     @media screen and (min-width: 600px) {
       width: 600px;
       justify-content: space-between;
-      margin: 0 auto 7vh;
+      margin: 0 auto 5vh;
     }
 
     @media screen and (min-width: 1023px) {
       width: 750px;
       justify-content: space-between;
-      margin: 0 auto 4vh;
+      margin: 0 auto 3vh;
     }
   }
 }
@@ -566,6 +573,10 @@ h2 {
     width: 200px;
     height: 70px;
     font-size: 24px;
+  }
+
+  &__start-btn:hover {
+    cursor: pointer;
   }
 
   &__logo-img {

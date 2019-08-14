@@ -18,7 +18,7 @@
         <p>Heres a spinning corgi</p>
         <img class="monster-dead-modal__img" src="../assets/dawg.gif" alt="tombstone" />
         <p>Play Again?</p>
-        <button class="restart-btn" @click="$emit('gameResetModal-method')">Restart</button>
+        <button class="restart-btn" @click="$emit('gameEnd-method')">Restart</button>
       </div>
     </modal>
   </div>

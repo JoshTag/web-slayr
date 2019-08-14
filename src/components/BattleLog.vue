@@ -29,6 +29,7 @@ export default {
   @media screen and (min-width: 1023px) {
     width: 600px;
     height: 20vh;
+    padding: 5px;
   }
 }
 

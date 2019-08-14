@@ -32,11 +32,19 @@ export default {
   &__stats {
     display: flex;
     justify-content: space-between;
-    padding-top: 10px;
+    padding-top: 5px;
+    font-weight: bold;
+        @media screen and (min-width: 1023px) {
+    font-size: 18px;
+  }
   }
 }
 .description {
   font-size: 14px;
-  padding-top: 10px;
+  padding-top: 5px;
+
+    @media screen and (min-width: 1023px) {
+    font-size: 16px;
+  }
 }
 </style>
