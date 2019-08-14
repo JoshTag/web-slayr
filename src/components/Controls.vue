@@ -3,23 +3,24 @@
     <div class="controls-container__player">
       <div class="controls-container__player__group">
         <button class="controls-container__btn" @click="$emit('atk-method')">Attack</button>
-        <button class="controls-container__btn" @click="$emit('doubleAtk-method')">Double Attack</button>
+        <button class="controls-container__btn" @click="$emit('doubleAtk-method')">Double Attack: {{ currentPlayer.dblAtkLeft}}</button>
       </div>
       <div class="controls-container__player__group">
-        <button class="controls-container__btn" @click="$emit('specialAtk-method')">Special Attack</button>
-        <button class="controls-container__btn" @click="$emit('healthPot-method')">Health Potion</button>
+        <button class="controls-container__btn" @click="$emit('specialAtk-method')">Special Attack: {{ currentPlayer.spcAtkLeft}}</button>
+        <button class="controls-container__btn" @click="$emit('healthPot-method')">Health Potion: {{ currentPlayer.hpPot}}</button>
       </div>
     </div>
     <button class="controls-container__btn-restart" @click="$emit('reset-method')">Restart</button>
 
     <!-- Uncomment to test attack methods -->
-    <!-- <button @click="$emit('setMonsterLvl-method')">start</button> -->
+    <button @click="$emit('setMonsterLvl-method')">start</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Controls"
+  name: "Controls",
+  props: [ "currentPlayer" ] 
 };
 </script>
 

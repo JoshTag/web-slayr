@@ -1,9 +1,10 @@
 <template>
   <div class="stats-container">
     <div class="stats-container__stats">
-      <p>Double Attack: {{ currentPlayer.dblAtkLeft}}</p>
-      <p>Special Attack: {{ currentPlayer.spcAtkLeft}}</p>
-      <p>HP Potions Left: {{ currentPlayer.hpPot}}</p>
+      <p>Attack Damage: {{ currentPlayer.damage}}</p>
+      <p>Double Attack Damage: {{ currentPlayer.dblAtk}} x 2</p>
+      <p>Special Attack Damage: {{ currentPlayer.specialAtk}}</p>
+      <p>Healing: {{ currentPlayer.healing}}</p>
     </div>
     <p class="description">{{ currentMonster.description }}</p>
   </div>
@@ -20,6 +21,7 @@ export default {
 .stats-container {
   width: 320px;
   margin: 0 auto auto;
+  background: rgba($color: #000000, $alpha: .3);
 
   @media screen and (min-width: 600px) {
     width: 500px;
@@ -31,19 +33,25 @@ export default {
 
   &__stats {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     padding-top: 5px;
-    font-weight: bold;
-        @media screen and (min-width: 1023px) {
-    font-size: 18px;
-  }
+
+
+    @media screen and (min-width: 1023px) {
+      font-size: 18px;
+      flex-flow: row wrap;
+    }
+
+    p {
+      margin-right: 40px;
+    }
   }
 }
 .description {
   font-size: 14px;
   padding-top: 5px;
 
-    @media screen and (min-width: 1023px) {
+  @media screen and (min-width: 1023px) {
     font-size: 16px;
   }
 }

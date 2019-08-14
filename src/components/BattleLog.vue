@@ -18,9 +18,10 @@ export default {
   height: 120px;
   width: 320px;
   margin: 0 auto;
-  border: 2px double rgba(0, 0, 0, .8);
+  border: 5px double #FFF;
   overflow: hidden;
-  background: rgba($color: #000000, $alpha: .3);
+  background: rgba($color: #000000, $alpha: .5);
+  padding: 5px;
 
   @media screen and (min-width: 600px) {
     width: 500px;
@@ -29,7 +30,6 @@ export default {
   @media screen and (min-width: 1023px) {
     width: 600px;
     height: 20vh;
-    padding: 5px;
   }
 }
 

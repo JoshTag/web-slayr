@@ -19,6 +19,7 @@
         <Player v-bind:currentPlayer="currentPlayer" />
       </div>
       <Controls
+        v-bind:currentPlayer="currentPlayer"
         v-on:atk-method="basicAtk"
         v-on:doubleAtk-method="doubleAtk"
         v-on:healthPot-method="healthPot"
@@ -133,7 +134,7 @@ export default {
       if (method === 1) {
         this.attackLoop(100);
       } else if (method === 2) {
-        this.attackHeal(500, 5000);
+        this.attackHeal(400, 5000);
       } else {
         this.attackHealth(500, 0.75);
       }
@@ -153,6 +154,7 @@ export default {
     },
     attackHeal(dmgHeal, hpReset) {
       this.currentPlayer.currentHP -= dmgHeal;
+      this.battleLog.push(`You've been attacked for ${dmgHeal}`)
 
       if (
         this.currentMonster.currentHP <=
@@ -263,7 +265,7 @@ export default {
       this.battleLog.push(`you've attacked for ${attackRandom} damage`);
     },
     basicAtkSix() {
-      let DamageMiss = [1, 400, 400];
+      let DamageMiss = [1, 350, 350];
       let attackRandom =
         DamageMiss[Math.floor(Math.random() * DamageMiss.length)];
 
@@ -301,15 +303,15 @@ export default {
     },
     healthPot() {
       if (this.currentPlayer.lvl === 3) {
-        this.hpVariable(150);
+        this.hpVariable(this.currentPlayer.healing);
       } else if (this.currentPlayer.lvl === 4) {
-        this.hpVariable(300);
+        this.hpVariable(this.currentPlayer.healing);
       } else if (this.currentPlayer.lvl === 5) {
-        this.hpVariable(500);
+        this.hpVariable(this.currentPlayer.healing);
       } else if (this.currentPlayer.lvl === 6) {
-        this.hpVariable(500);
+        this.hpVariable(this.currentPlayer.healing);
       } else {
-        this.hpVariable(20);
+        this.hpVariable(this.currentPlayer.healing);
       }
     },
     hpVariable(healing) {
@@ -379,7 +381,7 @@ export default {
         maxHP: 100,
         attack: 20,
         description:
-          "The Merge Conflictor will attack you with merge conflicts for 20 damage each turn"
+          "The Merge Conflictor will attack you with merge conflicts for 20hp"
       };
       this.currentPlayer = {
         lvl: 1,
@@ -391,7 +393,9 @@ export default {
         dblAtkLeft: 3,
         specialAtk: 25,
         spcAtkLeft: 1,
-        hpPot: 3
+        hpPot: 3,
+        damage: 10,
+        healing: 20
       };
       this.gameData = {
         player: [
@@ -405,7 +409,9 @@ export default {
             dblAtkLeft: 3,
             specialAtk: 50,
             spcAtkLeft: 1,
-            hpPot: 4
+            hpPot: 4,
+            damage: 25,
+            healing: 20
           },
           {
             lvl: 3,
@@ -416,7 +422,9 @@ export default {
             dblAtkLeft: 3,
             specialAtk: 70,
             spcAtkLeft: 1,
-            hpPot: 5
+            hpPot: 5,
+            damage: 50,
+            healing: 150
           },
           {
             lvl: 4,
@@ -427,18 +435,22 @@ export default {
             dblAtkLeft: 5,
             specialAtk: 200,
             spcAtkLeft: 1,
-            hpPot: 10
+            hpPot: 10,
+            damage: 75,
+            healing: 300
           },
           {
             lvl: 5,
             name: "Product Manager",
             currentHP: 2500,
             maxHP: 2500,
-            dblAtk: 150,
+            dblAtk: 100,
             dblAtkLeft: 5,
             specialAtk: 500,
             spcAtkLeft: 1,
-            hpPot: 20
+            hpPot: 20,
+            damage: 75,
+            healing: 400
           },
           {
             lvl: 6,
@@ -447,9 +459,11 @@ export default {
             maxHP: 5000,
             dblAtk: 250,
             dblAtkLeft: 5,
-            specialAtk: 2000,
+            specialAtk: 1000,
             spcAtkLeft: 1,
-            hpPot: 20
+            hpPot: 20,
+            damage: 350,
+            healing: 1000
           }
         ],
         monsters: [
@@ -460,7 +474,7 @@ export default {
             maxHP: 200,
             attack: 40,
             description:
-              "This monster will make throw failed to compile erros at you for 40 damage"
+              "This monster will make throw failed to compile erros at you for 40hp"
           },
           {
             lvl: 3,
@@ -468,9 +482,11 @@ export default {
             currentHP: 500,
             maxHP: 500,
             description:
-              "The hacker has a 80% chance to hack you for 60, damage \
-            10% chance for 100 damange, \
-            and 10% chance for 150 damage"
+              "The hacker is inconsitent with his skills. \
+            He has a 80% chance to hack you for 60hp, \
+            10% chance for 100hp, \
+            and 10% chance for 150hp. \
+            You also have 20% chance to only damage him for 1hp"
           },
           {
             lvl: 4,
@@ -480,7 +496,8 @@ export default {
             increaseAtkBase: 80,
             description:
               "This monster will inject you with SQL injections. \
-              It will attack you for 100 damage and each subsequent attack will increase by 20"
+              It will attack you for 100hp and each subsequent attack will increase by 20. \
+              You also havea 20% chance to miss your attack"
           },
           {
             lvl: 5,
@@ -488,10 +505,11 @@ export default {
             currentHP: 2500,
             maxHP: 2500,
             description:
-              "Spicy P is the ultimate web developer! It has three attacks. \
-            It will attack you with a for loop for a total of 500 damage. \
-            It will use a callback to attack you for 200 damage and heal for 200. \
-            Lastly it's DDoS attack will attack you for 40% of its missing health"
+              "Spicy P is the ultimate web developer! \
+            It will attack you multiple times for a total of 500hp. \
+            It will use callbacks to attack you for 200 damage and heal for 200. \
+            Lastly it's DDoS attack will attack you for 40% of its missing health. \
+            You also have a chance to only do 1 dmg"
           },
           {
             lvl: 6,

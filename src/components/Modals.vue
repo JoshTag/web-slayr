@@ -1,6 +1,6 @@
 <template>
   <div>
-    <modal name="play-dead" :width="300" :height="300">
+    <modal name="play-dead" :width="300" :height="300" :clickToClose="false">
       <div class="player-dead-modal">
         <div class="player-dead-modal__header">
           <img class="player-dead-modal__header__skull-one" src="../assets/skull.png" alt="skulls" />
@@ -12,7 +12,7 @@
       </div>
     </modal>
 
-    <modal name="monster-dead" :width="300" :height="400">
+    <modal name="monster-dead" :width="300" :height="400" :clickToClose="false">
       <div class="monster-dead-modal">
         <h2>YOU HAVE DEFEATED SALTY P!!</h2>
         <p>Heres a spinning corgi</p>
