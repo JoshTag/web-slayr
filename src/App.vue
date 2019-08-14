@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <!-- uncomment to test modal -->
-    <button  v-on:click="showGameEnd">test</button>
-    <button  v-on:click="showDeadModal">test</button>
+    <!-- <button  v-on:click="showGameEnd">test</button>
+    <button  v-on:click="showDeadModal">test</button> -->
     <div class="homescreen" v-if="!startGame">
       <img class="homescreen__logo-img" src="./assets/logo.png" alt="logo" />
       <button class="homescreen__start-btn" v-on:click="setGameData">Start Game</button>
