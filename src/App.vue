@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <!-- uncomment to test modal -->
-    <!-- <button  v-on:click="showGameEnd">test</button>
-    <button  v-on:click="showDeadModal">test</button> -->
+    <button  v-on:click="showGameEnd">test</button>
+    <button  v-on:click="showDeadModal">test</button>
     <div class="homescreen" v-if="!startGame">
       <img class="homescreen__logo-img" src="./assets/logo.png" alt="logo" />
       <button class="homescreen__start-btn" v-on:click="setGameData">Start Game</button>
@@ -40,9 +40,7 @@ import Controls from "./components/Controls";
 import BattleLog from "./components/BattleLog";
 import BattleStats from "./components/BattleStats";
 import Modals from "./components/Modals";
-import initialData from "./Data/InitialData";
 import { setTimeout } from "timers";
-import { constants } from "crypto";
 
 export default {
   name: "app",
@@ -134,7 +132,7 @@ export default {
       if (method === 1) {
         this.attackLoop(100);
       } else if (method === 2) {
-        this.attackHeal(400, 5000);
+        this.attackHeal(500, 5000);
       } else {
         this.attackHealth(500, 0.75);
       }
@@ -249,18 +247,16 @@ export default {
 
       this.currentMonster.currentHP -= attackRandom;
 
-      let message = ( attackRandom === 0
-          ? this.battleLog.push("You missed!")
-          : this.battleLog.push(`you've attacked for ${attackRandom} damage`));
+      this.battleLog.push( attackRandom === 0
+          ? "You missed!"
+          : `you've attacked for ${attackRandom} damage`);
     },
     basicAtkFive() {
-      let DamageMiss = [1, 250];
+      let DamageMiss = [1, 200];
       let attackRandom =
         DamageMiss[Math.floor(Math.random() * DamageMiss.length)];
 
-      this.currentMonster.currentHP -= attackRandom = 1
-        ? attackRandom
-        : attackRandom / 2;
+      this.currentMonster.currentHP -= attackRandom
 
       this.battleLog.push(`you've attacked for ${attackRandom} damage`);
     },
@@ -444,12 +440,12 @@ export default {
             name: "Product Manager",
             currentHP: 2500,
             maxHP: 2500,
-            dblAtk: 100,
+            dblAtk: 150,
             dblAtkLeft: 5,
             specialAtk: 500,
             spcAtkLeft: 1,
             hpPot: 20,
-            damage: 75,
+            damage: 200,
             healing: 400
           },
           {
@@ -457,12 +453,12 @@ export default {
             name: "Super Coder",
             currentHP: 5000,
             maxHP: 5000,
-            dblAtk: 250,
+            dblAtk: 300,
             dblAtkLeft: 5,
             specialAtk: 1000,
             spcAtkLeft: 1,
             hpPot: 20,
-            damage: 350,
+            damage: 400,
             healing: 1000
           }
         ],

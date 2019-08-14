@@ -17,8 +17,10 @@
         <h2>YOU HAVE DEFEATED SALTY P!!</h2>
         <p>Heres a spinning corgi</p>
         <img class="monster-dead-modal__img" src="../assets/dawg.gif" alt="tombstone" />
-        <p>Play Again?</p>
-        <button class="restart-btn" @click="$emit('gameEnd-method')">Restart</button>
+        <button class="restart-btn" @click="$emit('gameEnd-method')">Play Again!</button>
+        <p
+          class="monster-dead-modal__plug"
+        >Check out more of my work at <a href="http://www.JoshTag.com">www.JoshTag.com</a></p>
       </div>
     </modal>
   </div>
@@ -64,7 +66,7 @@ export default {
     img {
       height: 40px;
     }
-    
+
     &__skull-one {
       animation: skulls 3.5s infinite linear;
     }
@@ -100,11 +102,20 @@ export default {
     margin: 10px 0;
     animation: rotate 6s infinite ease-in-out;
   }
+
+  &__plug {
+    padding: 10px 16px;
+    text-align: center;
+
+    a {
+      text-decoration: none;
+      color: #303841;
+    }
+  }
 }
 
-.restart-btn:hover{
+.restart-btn:hover {
   cursor: pointer;
-  
 }
 
 @keyframes rotate {
