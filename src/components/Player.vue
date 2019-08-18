@@ -43,6 +43,8 @@ export default {
     height: 50px;
     font-size: 16px;
     vertical-align: text-bottom;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+      1px 1px 0 #000;
 
     @media screen and (min-width: 600px) {
       height: 25px;

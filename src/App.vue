@@ -373,12 +373,13 @@ export default {
       ];
       this.currentMonster = {
         lvl: 1,
-        name: "Merge Conflictor",
+        name: "Merge-a-pus",
         currentHP: 100,
         maxHP: 100,
         attack: 20,
         description:
-          "The Merge Conflictor will attack you with merge conflicts for 20hp"
+          "The Merge-a-pus will attack you with merge conflicts for 20hp",
+        image: require("./assets/Merge.svg")
       };
       this.currentPlayer = {
         lvl: 1,
@@ -466,35 +467,39 @@ export default {
         monsters: [
           {
             lvl: 2,
-            name: "Failed Compiler",
+            name: "Fail Whale",
             currentHP: 200,
             maxHP: 200,
             attack: 40,
             description:
-              "This monster will make throw failed to compile errors at you for 40hp"
+              "Twitters long lost 404 page whale will attack you for 40hp... \
+              The last four got lost somewhere ¯\\_(ツ)_/¯",
+            image: require("./assets/Whale.svg")
           },
           {
             lvl: 3,
-            name: "The Haker",
+            name: "Haker Zombie",
             currentHP: 500,
             maxHP: 500,
             description:
-              "The hacker is inconsitent with his skills. \
+              "This hacker is inconsitent with his skills... cause he's half dead \
             He has a 80% chance to hack you for 60hp, \
             10% chance for 100hp, \
             and 10% chance for 150hp. \
-            You also have 20% chance to only damage him for 1hp"
+            You also have 20% chance to only damage him for 1hp",
+            image: require("./assets/Hacker.svg")
           },
           {
             lvl: 4,
-            name: "Database Destroyer",
+            name: "Database Slug",
             currentHP: 1000,
             maxHP: 1000,
             increaseAtkBase: 80,
             description:
-              "This monster constantly collects more data on you. \
+              "This slug constantly collects more data on you. \
               It will attack you for 100hp and each subsequent attack will increase by 20. \
-              You also havea 20% chance to miss your attack"
+              You also havea 20% chance to miss your attack",
+            image: require("./assets/data.svg")
           },
           {
             lvl: 5,
@@ -506,14 +511,16 @@ export default {
             It will attack you multiple times for a total of 500hp. \
             It will use callbacks to attack you for 200 damage and heal for 200. \
             Lastly it's DDoS attack will attack you for 40% of its missing health. \
-            You also have a chance to only do 1 dmg"
+            You also have a chance to only do 1 dmg",
+            image: require("./assets/Pepper.svg")
           },
           {
             lvl: 6,
             name: "Salty P",
             currentHP: 5000,
             maxHP: 5000,
-            description: "ITS SALTY AF!"
+            description: "ITS SALTY AF!",
+            image: require("./assets/Salt.svg")
           }
         ]
       };

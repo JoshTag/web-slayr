@@ -5,7 +5,7 @@
       <div v-bind:style="{width: this.monsterHealthBar + '%'}"></div>
     </div>
     <p>{{currentMonster.currentHP}} / {{currentMonster.maxHP}}</p>
-    <img class="monster-container__img" alt="monster image" src="../assets/monster.png" />
+    <img class="monster-container__img" alt="monster image" v-bind:src="currentMonster.image"/>
   </div>
 </template>
 
@@ -43,6 +43,8 @@ export default {
     height: 50px;
     font-size: 16px;
     vertical-align: text-bottom;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+      1px 1px 0 #000;
 
     @media screen and (min-width: 600px) {
       height: 25px;
@@ -57,7 +59,7 @@ export default {
   &__img {
     height: 125px;
     width: 125px;
-    transform: scaleX(-1);
+    // transform: scaleX(-1);
     margin-top: 25px;
 
     @media screen and (min-width: 1023px) {
