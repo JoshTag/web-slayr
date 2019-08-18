@@ -15,25 +15,29 @@ export default {
 
 <style lang="scss" scoped>
 .log-container {
-  height: 120px;
+  height: 100px;
   width: 320px;
   margin: 0 auto;
-  border: 5px double #FFF;
-  overflow: hidden;
+  border: 2px solid #FFF;
+  overflow: auto;
   background: rgba($color: #000000, $alpha: .5);
-  padding: 5px;
+  padding: 3px;
 
   @media screen and (min-width: 600px) {
     width: 500px;
-    height: 160px;
+    height: 140px;
   }
   @media screen and (min-width: 1023px) {
     width: 600px;
     height: 20vh;
+    padding: 5px;
   }
 }
 
 .log-text {
   font-size: 14px;
+    @media screen and (min-width: 1023px) {
+    font-size: 18px;
+  }
 }
 </style>

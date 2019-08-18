@@ -1,10 +1,14 @@
 <template>
   <div class="stats-container">
     <div class="stats-container__stats">
-      <p>Attack Damage: {{ currentPlayer.damage}}</p>
-      <p>Double Attack Damage: {{ currentPlayer.dblAtk}} x 2</p>
-      <p>Special Attack Damage: {{ currentPlayer.specialAtk}}</p>
-      <p>Healing: {{ currentPlayer.healing}}</p>
+      <div>
+        <p>ATK DMG: {{ currentPlayer.damage}}</p>
+        <p>DBL ATK DMG: {{ dblAtkCalc }}</p>
+      </div>
+      <div>
+        <p>SPC ATK DMG: {{ currentPlayer.specialAtk}}</p>
+        <p>HEALING: {{ currentPlayer.healing}}</p>
+      </div>
     </div>
     <p class="description">{{ currentMonster.description }}</p>
   </div>
@@ -13,7 +17,12 @@
 <script>
 export default {
   name: "BattleStats",
-  props: ["currentMonster", "currentPlayer"]
+  props: ["currentMonster", "currentPlayer"],
+  computed: {
+    dblAtkCalc() {
+      return this.currentPlayer.dblAtk * 2;
+    }
+  }
 };
 </script>
 
@@ -21,7 +30,8 @@ export default {
 .stats-container {
   width: 320px;
   margin: 0 auto auto;
-  background: rgba($color: #000000, $alpha: .3);
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
 
   @media screen and (min-width: 600px) {
     width: 500px;
@@ -33,9 +43,8 @@ export default {
 
   &__stats {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding-top: 5px;
-
 
     @media screen and (min-width: 1023px) {
       font-size: 18px;
@@ -43,7 +52,7 @@ export default {
     }
 
     p {
-      margin-right: 40px;
+      margin-right: 20px;
     }
   }
 }

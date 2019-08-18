@@ -25,7 +25,7 @@ export default {
 
 <style lang="scss" scoped>
 .player-container {
-  width: 150px;
+  width: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;

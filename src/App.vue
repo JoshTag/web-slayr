@@ -3,10 +3,9 @@
     <!-- uncomment to test modal -->
     <!-- <button  v-on:click="showGameEnd">test</button>
     <button  v-on:click="showDeadModal">test</button> -->
-    <div class="homescreen" v-if="!startGame">
-      <img class="homescreen__logo-img" src="./assets/logo.png" alt="logo" />
-      <button class="homescreen__start-btn" v-on:click="setGameData">Start Game</button>
-    </div>
+    <StartPage 
+      v-bind:startGame="startGame" 
+      v-on:startGame-method="setGameData"/>
     <div class="main" v-if="startGame">
       <BattleLog class="main__battlelog" v-bind:battleLog="battleLog" />
       <BattleStats
@@ -39,6 +38,7 @@ import Player from "./components/Player";
 import Controls from "./components/Controls";
 import BattleLog from "./components/BattleLog";
 import BattleStats from "./components/BattleStats";
+import StartPage from "./components/StartPage"
 import Modals from "./components/Modals";
 import { setTimeout } from "timers";
 
@@ -50,7 +50,8 @@ export default {
     Controls,
     BattleLog,
     Modals,
-    BattleStats
+    BattleStats,
+    StartPage
   },
   data() {
     return {
@@ -372,7 +373,7 @@ export default {
       ];
       this.currentMonster = {
         lvl: 1,
-        name: "The Merge Conflictor",
+        name: "Merge Conflictor",
         currentHP: 100,
         maxHP: 100,
         attack: 20,
@@ -424,7 +425,7 @@ export default {
           },
           {
             lvl: 4,
-            name: "Product Manager",
+            name: "Full-Stack Developer",
             currentHP: 1000,
             maxHP: 1000,
             dblAtk: 40,
@@ -465,12 +466,12 @@ export default {
         monsters: [
           {
             lvl: 2,
-            name: "The Failed to Compiler",
+            name: "Failed Compiler",
             currentHP: 200,
             maxHP: 200,
             attack: 40,
             description:
-              "This monster will make throw failed to compile erros at you for 40hp"
+              "This monster will make throw failed to compile errors at you for 40hp"
           },
           {
             lvl: 3,
@@ -486,12 +487,12 @@ export default {
           },
           {
             lvl: 4,
-            name: "The Database Damager",
+            name: "Database Destroyer",
             currentHP: 1000,
             maxHP: 1000,
             increaseAtkBase: 80,
             description:
-              "This monster will inject you with SQL injections. \
+              "This monster constantly collects more data on you. \
               It will attack you for 100hp and each subsequent attack will increase by 20. \
               You also havea 20% chance to miss your attack"
           },
@@ -555,6 +556,7 @@ h2 {
 
   &__health-containers {
     display: flex;
+    justify-content: space-between;
     width: 300px;
     margin: 0 auto 10px;
 
@@ -569,33 +571,6 @@ h2 {
       justify-content: space-between;
       margin: 0 auto 3vh;
     }
-  }
-}
-
-.homescreen {
-  width: 320px;
-  height: 80vh;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  &__start-btn {
-    background: #303841;
-    border: none;
-    width: 200px;
-    height: 70px;
-    font-size: 24px;
-  }
-
-  &__start-btn:hover {
-    cursor: pointer;
-  }
-
-  &__logo-img {
-    width: 100%;
-    margin-bottom: 50px;
   }
 }
 </style>
