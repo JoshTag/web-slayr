@@ -59,13 +59,18 @@ export default {
   &__img {
     height: 125px;
     width: 125px;
-    // transform: scaleX(-1);
     margin-top: 25px;
 
-    @media screen and (min-width: 1023px) {
+    @media screen and (min-width: 600px) {
       width: 175px;
       height: 175px;
-      margin-top: 10px;
+      margin-top: 0px;
+    }
+
+    @media screen and (min-width: 1023px) {
+      width: 200px;
+      height: 200px;
+      margin-top: 0;
     }
   }
 }
@@ -80,7 +85,7 @@ export default {
 }
 
 #monster-health div {
-  height: 100%;
+  height: 15px;
   background-color: #e00a0a;
 }
 </style>

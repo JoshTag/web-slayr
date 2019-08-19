@@ -11,9 +11,6 @@
       </div>
     </div>
     <button class="controls-container__btn-restart" @click="$emit('reset-method')">Restart</button>
-
-    <!-- Uncomment to test attack methods -->
-    <button @click="$emit('setMonsterLvl-method')">start</button>
   </div>
 </template>
 

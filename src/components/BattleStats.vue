@@ -1,11 +1,11 @@
 <template>
   <div class="stats-container">
     <div class="stats-container__stats">
-      <div>
+      <div class="stats-container__stats__dblWrap">
         <p>ATK DMG: {{ currentPlayer.damage}}</p>
         <p>DBL ATK DMG: {{ dblAtkCalc }}</p>
       </div>
-      <div>
+      <div class="stats-container__stats__dblWrap">
         <p>SPC ATK DMG: {{ currentPlayer.specialAtk}}</p>
         <p>HEALING: {{ currentPlayer.healing}}</p>
       </div>
@@ -48,11 +48,20 @@ export default {
 
     @media screen and (min-width: 1023px) {
       font-size: 18px;
-      flex-flow: row wrap;
+      flex-direction: row;
+      width: 700px;
     }
 
     p {
       margin-right: 20px;
+    }
+
+    &__dblWrap {
+      @media screen and (min-width: 1023px) {
+      display: flex;
+      font-size: 18px;
+      flex-direction: row;
+    }
     }
   }
 }

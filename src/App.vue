@@ -1,32 +1,31 @@
 <template>
   <div id="app">
-    <!-- uncomment to test modal -->
-    <!-- <button  v-on:click="showGameEnd">test</button>
-    <button  v-on:click="showDeadModal">test</button> -->
-    <StartPage 
-      v-bind:startGame="startGame" 
-      v-on:startGame-method="setGameData"/>
+    <!-- uncomment to test modal/game lvl-->
+    <!-- <button v-on:click="showGameEnd">End game modal</button> -->
+    <!-- <button v-on:click="showDeadModal">death modal</button> -->
+    <!-- <button style="position: absolute" v-on:click="setMonsterLvl">Monster LVL</button> -->
+    <StartPage v-bind:startGame="startGame" v-on:startGame-method="setGameData" />
     <div class="main" v-if="startGame">
       <BattleLog class="main__battlelog" v-bind:battleLog="battleLog" />
-      <BattleStats
-        class="main__battlestats"
-        v-bind:currentMonster="currentMonster"
-        :currentPlayer="currentPlayer"
-      />
-      <div class="main__health-containers">
-        <Monster v-bind:currentMonster="currentMonster" />
-        <Player v-bind:currentPlayer="currentPlayer" />
-      </div>
-      <Controls
-        v-bind:currentPlayer="currentPlayer"
-        v-on:atk-method="basicAtk"
-        v-on:doubleAtk-method="doubleAtk"
-        v-on:healthPot-method="healthPot"
-        v-on:setMonsterLvl-method="setMonsterLvl"
-        v-on:specialAtk-method="specialAtk"
-        v-on:reset-method="setGameData"
-        v-on:show-method="showDeadModal"
-      />
+        <BattleStats
+          class="main__battlestats"
+          v-bind:currentMonster="currentMonster"
+          :currentPlayer="currentPlayer"
+        />
+        <div class="main__health-containers">
+          <Monster v-bind:currentMonster="currentMonster" />
+          <Player v-bind:currentPlayer="currentPlayer" />
+        </div>
+        <Controls
+          v-bind:currentPlayer="currentPlayer"
+          v-on:atk-method="basicAtk"
+          v-on:doubleAtk-method="doubleAtk"
+          v-on:healthPot-method="healthPot"
+          v-on:setMonsterLvl-method="setMonsterLvl"
+          v-on:specialAtk-method="specialAtk"
+          v-on:reset-method="setGameData"
+          v-on:show-method="showDeadModal"
+        />
     </div>
     <Modals v-on:gameResetModal-method="gameResetModal" v-on:gameEnd-method="gameEndModal" />
   </div>
@@ -38,7 +37,7 @@ import Player from "./components/Player";
 import Controls from "./components/Controls";
 import BattleLog from "./components/BattleLog";
 import BattleStats from "./components/BattleStats";
-import StartPage from "./components/StartPage"
+import StartPage from "./components/StartPage";
 import Modals from "./components/Modals";
 import { setTimeout } from "timers";
 
@@ -148,22 +147,30 @@ export default {
 
       this.currentPlayer.currentHP -=
         roundedDamage < dmgFloor ? dmgFloor : roundedDamage;
-      this.battleLog.push(`You've been attacked for ${roundedDamage < dmgFloor ? dmgFloor : roundedDamage}`)
+      this.battleLog.push(
+        `You've been attacked for ${
+          roundedDamage < dmgFloor ? dmgFloor : roundedDamage
+        }`
+      );
       this.checkLoss();
     },
     attackHeal(dmgHeal, hpReset) {
       this.currentPlayer.currentHP -= dmgHeal;
-      this.battleLog.push(`You've been attacked for ${dmgHeal}`)
+      this.battleLog.push(`You've been attacked for ${dmgHeal}`);
 
       if (
         this.currentMonster.currentHP <=
         this.currentMonster.maxHP - dmgHeal
       ) {
         this.currentMonster.currentHP += dmgHeal;
-        this.battleLog.push(`${this.currentMonster.name} has healed for ${dmgHeal}`)
+        this.battleLog.push(
+          `${this.currentMonster.name} has healed for ${dmgHeal}`
+        );
       } else {
         this.currentMonster.currentHP = hpReset;
-        this.battleLog.push(`${this.currentMonster.name} has healed to full health`)
+        this.battleLog.push(
+          `${this.currentMonster.name} has healed to full health`
+        );
       }
       this.checkLoss();
     },
@@ -248,16 +255,18 @@ export default {
 
       this.currentMonster.currentHP -= attackRandom;
 
-      this.battleLog.push( attackRandom === 0
+      this.battleLog.push(
+        attackRandom === 0
           ? "You missed!"
-          : `you've attacked for ${attackRandom} damage`);
+          : `you've attacked for ${attackRandom} damage`
+      );
     },
     basicAtkFive() {
       let DamageMiss = [1, 200];
       let attackRandom =
         DamageMiss[Math.floor(Math.random() * DamageMiss.length)];
 
-      this.currentMonster.currentHP -= attackRandom
+      this.currentMonster.currentHP -= attackRandom;
 
       this.battleLog.push(`you've attacked for ${attackRandom} damage`);
     },
@@ -482,7 +491,7 @@ export default {
             currentHP: 500,
             maxHP: 500,
             description:
-              "This hacker is inconsitent with his skills... cause he's half dead \
+              "This hacker is inconsitent with his skills... cause he's half dead. \
             He has a 80% chance to hack you for 60hp, \
             10% chance for 100hp, \
             and 10% chance for 150hp. \
@@ -560,7 +569,7 @@ h2 {
   height: 100vh;
   display: flex;
   flex-direction: column;
-
+  
   &__health-containers {
     display: flex;
     justify-content: space-between;
@@ -576,8 +585,9 @@ h2 {
     @media screen and (min-width: 1023px) {
       width: 750px;
       justify-content: space-between;
-      margin: 0 auto 3vh;
+      margin: 0 auto 0;
     }
   }
 }
+
 </style>
