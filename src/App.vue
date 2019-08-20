@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <!-- uncomment to test modal/game lvl-->
-    <!-- <button v-on:click="showGameEnd">End game modal</button> -->
-    <!-- <button v-on:click="showDeadModal">death modal</button> -->
-    <!-- <button style="position: absolute" v-on:click="setMonsterLvl">Monster LVL</button> -->
+    <button v-on:click="showGameEnd">End game modal</button>
+    <button v-on:click="showDeadModal">death modal</button>
+    <button style="position: absolute" v-on:click="setMonsterLvl">Monster LVL</button>
     <StartPage v-bind:startGame="startGame" v-on:startGame-method="setGameData" />
     <div class="main" v-if="startGame">
       <BattleLog class="main__battlelog" v-bind:battleLog="battleLog" />
@@ -487,7 +487,7 @@ export default {
           },
           {
             lvl: 3,
-            name: "Haker Zombie",
+            name: "Half Dead Haker",
             currentHP: 500,
             maxHP: 500,
             description:

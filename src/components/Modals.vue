@@ -1,18 +1,18 @@
 <template>
   <div>
-    <modal name="play-dead" :width="300" :height="300" :clickToClose="false">
+    <modal name="play-dead" :width="320" :height="500" :clickToClose="false">
       <div class="player-dead-modal">
         <div class="player-dead-modal__header">
-          <img class="player-dead-modal__header__skull-one" src="../assets/skull.png" alt="skulls" />
+          <img class="player-dead-modal__header__skull-one" src="../assets/Skull.svg" alt="skulls" />
           <h2>YOU DED!</h2>
-          <img class="player-dead-modal__header__skull-two" src="../assets/skull.png" alt="skulls" />
+          <img class="player-dead-modal__header__skull-two" src="../assets/Skull.svg" alt="skulls" />
         </div>
-        <img class="player-dead-modal__img" src="../assets/tombstone.png" alt="tombstone" />
+        <img class="player-dead-modal__img" src="../assets/Tombstone.svg" alt="tombstone" />
         <button class="restart-btn" @click="$emit('gameResetModal-method')">Restart Game</button>
       </div>
     </modal>
 
-    <modal name="monster-dead" :width="300" :height="400" :clickToClose="false">
+    <modal name="monster-dead" :width="320" :height="500" :clickToClose="false">
       <div class="monster-dead-modal">
         <h2>YOU HAVE DEFEATED SALTY P!!</h2>
         <p>Heres a spinning corgi</p>
@@ -54,9 +54,13 @@ export default {
   }
 
   &__img {
-    height: 150px;
+    height: 250px;
     margin: 10px 0;
-    animation: tilting 2.5s infinite linear;
+    // animation: tilting 2.5s infinite linear;
+
+    @media screen and (min-width: 600px) {
+      height: 330px;
+    }
   }
 
   &__header {

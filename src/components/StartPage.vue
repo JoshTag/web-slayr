@@ -40,15 +40,14 @@ export default {
     width: 200px;
     height: 55px;
     font-size: 24px;
-    animation: snake 45s linear infinite;
+    animation: snake 3s linear infinite;
     transition: all 200ms cubic-bezier(.5,.15,.25,.9);
-	  stroke-dasharray: 180 180 100 300;
+    stroke-dasharray: 500 200 500 200;
     }
 
   &__start-btn:hover {
     cursor: pointer;
-    color: #fff;
-		stroke-dasharray: 244 0 240 0;
+		stroke-dasharray: 500 0 500 0;
   }
 
   &__logo-img {
@@ -59,7 +58,7 @@ export default {
 }
 
 @keyframes snake {
-	0%{stroke-dashoffset: -220}
-	100%{stroke-dashoffset: -704}
+	0%{stroke-dashoffset: 110}
+	100%{stroke-dashoffset: 810}
 }
 </style>
