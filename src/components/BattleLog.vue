@@ -25,7 +25,7 @@ export default {
 
   @media screen and (min-width: 600px) {
     width: 500px;
-    height: 140px;
+    height: 120px;
   }
   @media screen and (min-width: 1023px) {
     width: 600px;

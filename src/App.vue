@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <!-- uncomment to test modal/game lvl-->
-    <button v-on:click="showGameEnd">End game modal</button>
-    <button v-on:click="showDeadModal">death modal</button>
-    <button style="position: absolute" v-on:click="setMonsterLvl">Monster LVL</button>
+    <!-- <button v-on:click="showGameEnd">End game modal</button> -->
+    <!-- <button v-on:click="showDeadModal">death modal</button> -->
+    <!-- <button style="position: absolute" v-on:click="setMonsterLvl">Monster LVL</button> -->
     <StartPage v-bind:startGame="startGame" v-on:startGame-method="setGameData" />
     <div class="main" v-if="startGame">
       <BattleLog class="main__battlelog" v-bind:battleLog="battleLog" />
@@ -461,7 +461,7 @@ export default {
           },
           {
             lvl: 6,
-            name: "Super Coder",
+            name: "CTO",
             currentHP: 5000,
             maxHP: 5000,
             dblAtk: 300,
@@ -550,13 +550,12 @@ export default {
 body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
-  background: url("./assets/cave-background.png");
-  background-size: 770px 90vh;
+  background: url("./assets/Background.png");
   background-repeat: no-repeat;
-  background-color: black;
+  background-size: 770px 100vh;
 
   @media screen and (min-width: 600px) {
-    background-size: 100vw 80vh;
+    background-size: 100vw 100vh;
   }
 }
 
@@ -579,7 +578,7 @@ h2 {
     @media screen and (min-width: 600px) {
       width: 600px;
       justify-content: space-between;
-      margin: 0 auto 5vh;
+      margin: 0 auto;
     }
 
     @media screen and (min-width: 1023px) {

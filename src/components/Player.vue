@@ -35,8 +35,8 @@ export default {
   }
 
   @media screen and (min-width: 1023px) {
-    width: 275px;
-    height: 275px;
+    width: 300px;
+    height: 300px;
   }
 
   &__header {

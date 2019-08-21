@@ -10,7 +10,7 @@
         <button class="controls-container__btn" @click="$emit('healthPot-method')">Health Potion: {{ currentPlayer.hpPot}}</button>
       </div>
     </div>
-    <button class="controls-container__btn-restart" @click="$emit('reset-method')">Restart</button>
+    <!-- <button class="controls-container__btn-restart" @click="$emit('reset-method')">Restart</button> -->
   </div>
 </template>
 
@@ -25,9 +25,8 @@ export default {
 .controls-container {
   display: flex;
   flex-direction: row;
-  padding-bottom: 20px;
   width: 320px;
-  margin: 0 auto;
+  margin: 0 auto 10px;
 
   @media screen and (min-width: 600px) {
     display: flex;
@@ -37,19 +36,20 @@ export default {
   }
 
   @media screen and (min-width: 1023px) {
-    height: 20vh;
+    height: 15vh;
   }
 
   &__btn {
     height: 30px;
-    width: 125px;
-    background: #303841;
+    width: 155px;
+    background: #170312;
     border: none;
     margin-bottom: 5px;
 
     @media screen and (min-width: 600px) {
       width: 100%;
-      margin: 5px 0 0;
+      margin: 15px 0 0;
+      font-size: 14px;
     }
   }
 
@@ -60,7 +60,7 @@ export default {
   &__btn-restart {
     height: 65px;
     width: 125px;
-    background: #303841;
+    background: #191308;
     border: none;
 
     @media screen and (min-width: 600px) {
@@ -71,7 +71,10 @@ export default {
   }
 
   &__player {
-    display: flex;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
     @media screen and (min-width: 600px) {
       width: 100%;
       justify-content: space-between;

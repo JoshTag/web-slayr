@@ -35,7 +35,7 @@ export default {
   }
 
   &__start-btn {
-    background: #303841;
+    background: #000;
     border: none;
     width: 200px;
     height: 55px;
