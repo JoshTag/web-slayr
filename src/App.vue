@@ -3,29 +3,29 @@
     <!-- uncomment to test modal/game lvl-->
     <!-- <button v-on:click="showGameEnd">End game modal</button> -->
     <!-- <button v-on:click="showDeadModal">death modal</button> -->
-    <!-- <button style="position: absolute" v-on:click="setMonsterLvl">Monster LVL</button> -->
+    <button style="position: absolute" v-on:click="setMonsterLvl">Monster LVL</button>
     <StartPage v-bind:startGame="startGame" v-on:startGame-method="setGameData" />
     <div class="main" v-if="startGame">
       <BattleLog class="main__battlelog" v-bind:battleLog="battleLog" />
-        <BattleStats
-          class="main__battlestats"
-          v-bind:currentMonster="currentMonster"
-          :currentPlayer="currentPlayer"
-        />
-        <div class="main__health-containers">
-          <Monster v-bind:currentMonster="currentMonster" />
-          <Player v-bind:currentPlayer="currentPlayer" />
-        </div>
-        <Controls
-          v-bind:currentPlayer="currentPlayer"
-          v-on:atk-method="basicAtk"
-          v-on:doubleAtk-method="doubleAtk"
-          v-on:healthPot-method="healthPot"
-          v-on:setMonsterLvl-method="setMonsterLvl"
-          v-on:specialAtk-method="specialAtk"
-          v-on:reset-method="setGameData"
-          v-on:show-method="showDeadModal"
-        />
+      <BattleStats
+        class="main__battlestats"
+        v-bind:currentMonster="currentMonster"
+        :currentPlayer="currentPlayer"
+      />
+      <div class="main__health-containers">
+        <Monster v-bind:currentMonster="currentMonster" />
+        <Player v-bind:currentPlayer="currentPlayer" />
+      </div>
+      <Controls
+        v-bind:currentPlayer="currentPlayer"
+        v-on:atk-method="basicAtk"
+        v-on:doubleAtk-method="doubleAtk"
+        v-on:healthPot-method="healthPot"
+        v-on:setMonsterLvl-method="setMonsterLvl"
+        v-on:specialAtk-method="specialAtk"
+        v-on:reset-method="setGameData"
+        v-on:show-method="showDeadModal"
+      />
     </div>
     <Modals v-on:gameResetModal-method="gameResetModal" v-on:gameEnd-method="gameEndModal" />
   </div>
@@ -93,7 +93,7 @@ export default {
       }
     },
     monsterAtkThree() {
-      let damage = [60, 60, 60, 60, 60, 60, 60, 60, 100, 150];
+      let damage = [60, 60, 60, 60, 60, 60, 60, 150, 150, 150];
       let attackRandom = damage[Math.floor(Math.random() * damage.length)];
 
       this.currentPlayer.currentHP -= attackRandom;
@@ -102,7 +102,7 @@ export default {
       this.checkLoss();
     },
     monsterAtkFour() {
-      let attack = (this.currentMonster.increaseAtkBase += 20);
+      let attack = (this.currentMonster.increaseAtkBase += 25);
 
       this.currentPlayer.currentHP -= attack;
       this.battleLog.push(`you've been attacked for ${attack}`);
@@ -308,26 +308,14 @@ export default {
       }
     },
     healthPot() {
-      if (this.currentPlayer.lvl === 3) {
-        this.hpVariable(this.currentPlayer.healing);
-      } else if (this.currentPlayer.lvl === 4) {
-        this.hpVariable(this.currentPlayer.healing);
-      } else if (this.currentPlayer.lvl === 5) {
-        this.hpVariable(this.currentPlayer.healing);
-      } else if (this.currentPlayer.lvl === 6) {
-        this.hpVariable(this.currentPlayer.healing);
-      } else {
-        this.hpVariable(this.currentPlayer.healing);
-      }
-    },
-    hpVariable(healing) {
       if (
-        this.currentPlayer.currentHP <= this.currentPlayer.maxHP - healing &&
+        this.currentPlayer.currentHP <=
+          this.currentPlayer.maxHP - this.currentPlayer.healing &&
         this.currentPlayer.hpPot > 0
       ) {
-        this.currentPlayer.currentHP += healing;
+        this.currentPlayer.currentHP += this.currentPlayer.healing;
         this.currentPlayer.hpPot -= 1;
-        this.battleLog.push(`you healed for ${healing} HP`);
+        this.battleLog.push(`you healed for ${this.currentPlayer.healing} HP`);
       } else {
         this.battleLog.push(`you cannot use this item`);
       }
@@ -377,7 +365,7 @@ export default {
       this.startGame = true;
       this.currentLvl = 0;
       this.battleLog = [
-        "You're just a new web developer looking through the caves of code. \
+        "You're a new web developer looking through the caves of code. \
         It is said that if you defeat all five code monsters, you yourself will become the greatest coder of all time!"
       ];
       this.currentMonster = {
@@ -402,7 +390,8 @@ export default {
         spcAtkLeft: 1,
         hpPot: 3,
         damage: 10,
-        healing: 20
+        healing: 20,
+        image: require("./assets/Player-one.png")
       };
       this.gameData = {
         player: [
@@ -417,8 +406,9 @@ export default {
             specialAtk: 50,
             spcAtkLeft: 1,
             hpPot: 4,
-            damage: 25,
-            healing: 20
+            damage: 20,
+            healing: 20,
+            image: require("./assets/Player-two.png")
           },
           {
             lvl: 3,
@@ -430,21 +420,23 @@ export default {
             specialAtk: 70,
             spcAtkLeft: 1,
             hpPot: 5,
-            damage: 50,
-            healing: 150
+            damage: 40,
+            healing: 150,
+            image: require("./assets/Player-three.png")
           },
           {
             lvl: 4,
             name: "Full-Stack Developer",
             currentHP: 1000,
             maxHP: 1000,
-            dblAtk: 40,
+            dblAtk: 50,
             dblAtkLeft: 5,
-            specialAtk: 200,
+            specialAtk: 150,
             spcAtkLeft: 1,
             hpPot: 10,
-            damage: 75,
-            healing: 300
+            damage: 60,
+            healing: 300,
+            image: require("./assets/Player-four.png")
           },
           {
             lvl: 5,
@@ -457,7 +449,8 @@ export default {
             spcAtkLeft: 1,
             hpPot: 20,
             damage: 200,
-            healing: 400
+            healing: 400,
+            image: require("./assets/Player-five.png")
           },
           {
             lvl: 6,
@@ -470,7 +463,8 @@ export default {
             spcAtkLeft: 1,
             hpPot: 20,
             damage: 400,
-            healing: 1000
+            healing: 1000,
+            image: require("./assets/Player-six.png")
           }
         ],
         monsters: [
@@ -492,9 +486,8 @@ export default {
             maxHP: 500,
             description:
               "This hacker is inconsitent with his skills... cause he's half dead. \
-            He has a 80% chance to hack you for 60hp, \
-            10% chance for 100hp, \
-            and 10% chance for 150hp. \
+            He has a 70% chance to hack you for 60hp, \
+            and 30% chance for 150hp. \
             You also have 20% chance to only damage him for 1hp",
             image: require("./assets/Hacker.svg")
           },
@@ -503,10 +496,10 @@ export default {
             name: "Database Slug",
             currentHP: 1000,
             maxHP: 1000,
-            increaseAtkBase: 80,
+            increaseAtkBase: 75,
             description:
               "This slug constantly collects more data on you. \
-              It will attack you for 100hp and each subsequent attack will increase by 20. \
+              It will attack you for 100hp and each subsequent attack will increase by 25. \
               You also havea 20% chance to miss your attack",
             image: require("./assets/data.svg")
           },
@@ -528,7 +521,7 @@ export default {
             name: "Salty P",
             currentHP: 5000,
             maxHP: 5000,
-            description: "ITS SALTY AF!",
+            description: "ITS SALTY P!",
             image: require("./assets/Salt.svg")
           }
         ]
@@ -568,7 +561,7 @@ h2 {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  
+
   &__health-containers {
     display: flex;
     justify-content: space-between;
@@ -588,5 +581,4 @@ h2 {
     }
   }
 }
-
 </style>

@@ -40,7 +40,7 @@ export default {
     width: 200px;
     height: 55px;
     font-size: 24px;
-    animation: snake 3s linear infinite;
+    animation: snake 4s linear infinite;
     transition: all 200ms cubic-bezier(.5,.15,.25,.9);
     stroke-dasharray: 500 200 500 200;
     }

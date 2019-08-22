@@ -23,8 +23,8 @@
         </radialGradient>
     </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Artboard" transform="translate(-123.000000, -2952.000000)">
-            <g id="data" transform="translate(1168.000000, 3688.000000) scale(-1, 1) rotate(90.000000) translate(-1168.000000, -3688.000000) translate(423.000000, 2655.000000)">
+        <g id="Charecters" transform="translate(-370.000000, -3170.000000)">
+            <g id="data" transform="translate(1415.000000, 3906.000000) scale(-1, 1) rotate(90.000000) translate(-1415.000000, -3906.000000) translate(670.000000, 2873.000000)">
                 <g id="Group-2" transform="translate(828.500000, 804.500000) rotate(90.000000) translate(-828.500000, -804.500000) translate(161.000000, 312.000000)">
                     <path d="M315.963726,131.92041 C419.909709,20.9293277 571.731168,-36.309071 771.428102,-39.7947855 C971.125037,-43.2805 1132.88159,14.305259 1256.69775,132.962492 L1275.60276,1025.07164 L310.898451,1020.52508 L315.963726,131.92041 Z" id="Path-6" stroke="#979797" fill="url(#linearGradient-1)" transform="translate(793.250605, 492.563819) rotate(91.000000) translate(-793.250605, -492.563819) "></path>
                     <path d="M441.170902,18.5438196 C585.36342,50.5863025 657.45968,210.035801 657.45968,496.892314 C657.45968,783.748828 585.36342,943.198326 441.170902,975.240809" id="Path-5" stroke="#976300" stroke-width="12"></path>

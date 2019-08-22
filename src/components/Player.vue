@@ -5,7 +5,7 @@
       <div v-bind:style="{width: playerHealthBar + '%'}"></div>
     </div>
     <p>{{currentPlayer.currentHP}} / {{currentPlayer.maxHP}}</p>
-    <img class="player-container__img" alt="player image" src="../assets/player.png" />
+    <img class="player-container__img" alt="player image" v-bind:src="currentPlayer.image" />
   </div>
 </template>
 

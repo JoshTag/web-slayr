@@ -15,12 +15,12 @@
     <modal name="monster-dead" :width="320" :height="500" :clickToClose="false">
       <div class="monster-dead-modal">
         <h2>YOU HAVE DEFEATED SALTY P!!</h2>
-        <p>Heres a spinning corgi</p>
-        <img class="monster-dead-modal__img" src="../assets/dawg.gif" alt="tombstone" />
+        <img class="monster-dead-modal__img" src="../assets/Ice-Cream.svg" alt="tombstone" />
         <button class="restart-btn" @click="$emit('gameEnd-method')">Play Again!</button>
-        <p
-          class="monster-dead-modal__plug"
-        >Check out more of my work at <a href="http://www.JoshTag.com">www.JoshTag.com</a></p>
+        <p class="monster-dead-modal__plug">
+          Check out more of my work at
+          <a href="http://www.JoshTag.com">www.JoshTag.com</a>
+        </p>
       </div>
     </modal>
   </div>
@@ -56,7 +56,6 @@ export default {
   &__img {
     height: 250px;
     margin: 10px 0;
-    // animation: tilting 2.5s infinite linear;
 
     @media screen and (min-width: 600px) {
       height: 330px;
@@ -102,9 +101,9 @@ export default {
   }
 
   &__img {
-    height: 150px;
+    height: 300px;
     margin: 10px 0;
-    animation: rotate 6s infinite ease-in-out;
+    animation: wobble-hor-bottom 4s infinite ease-in-out;
   }
 
   &__plug {
@@ -134,21 +133,26 @@ export default {
   }
 }
 
-@keyframes tilting {
-  0% {
-    transform: rotate(25deg);
+@keyframes wobble-hor-bottom {
+  0%,
+  100% {
+    transform: translateX(0%);
+    transform-origin: 50% 50%;
   }
-  25% {
-    transform: rotate(0deg);
+  15% {
+    transform: translateX(-30px) rotate(-6deg);
   }
-  50% {
-    transform: rotate(-25deg);
+  30% {
+    transform: translateX(15px) rotate(6deg);
+  }
+  45% {
+    transform: translateX(-15px) rotate(-3.6deg);
+  }
+  60% {
+    transform: translateX(9px) rotate(2.4deg);
   }
   75% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(25deg);
+    transform: translateX(-6px) rotate(-1.2deg);
   }
 }
 
