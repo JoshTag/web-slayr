@@ -10,7 +10,7 @@
         <button class="controls-container__btn" @click="$emit('healthPot-method')">Health Potion: {{ currentPlayer.hpPot}}</button>
       </div>
     </div>
-    <button class="controls-container__btn-restart" @click="$emit('reset-method')">Restart</button>
+    <!-- <button class="controls-container__btn-restart" @click="$emit('reset-method')">Restart</button> -->
   </div>
 </template>
 
