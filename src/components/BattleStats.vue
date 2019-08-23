@@ -3,7 +3,7 @@
     <div class="stats-container__stats">
       <div class="stats-container__stats__dblWrap">
         <p>ATK DMG: {{ currentPlayer.damage}}</p>
-        <p>SQL ATK DMG: {{ dblAtkCalc }}</p>
+        <p>SQL ATK DMG: {{ currentPlayer.sqlAtk }}</p>
       </div>
       <div class="stats-container__stats__dblWrap">
         <p>DDoS ATK DMG: {{ currentPlayer.specialAtk}}</p>
@@ -18,11 +18,6 @@
 export default {
   name: "BattleStats",
   props: ["currentMonster", "currentPlayer"],
-  computed: {
-    dblAtkCalc() {
-      return this.currentPlayer.dblAtk * 2;
-    }
-  }
 };
 </script>
 

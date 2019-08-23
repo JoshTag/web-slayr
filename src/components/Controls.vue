@@ -3,7 +3,7 @@
     <div class="controls-container__player">
       <div class="controls-container__player__group">
         <button class="controls-container__btn" @click="$emit('atk-method')">Attack</button>
-        <button class="controls-container__btn" @click="$emit('sqlAtk-method')">SQL Injection: {{ currentPlayer.dblAtkLeft}}</button>
+        <button class="controls-container__btn" @click="$emit('sqlAtk-method')">SQL Injection: {{ currentPlayer.sqlAtkLeft}}</button>
       </div>
       <div class="controls-container__player__group">
         <button class="controls-container__btn" @click="$emit('specialAtk-method')">DDoS Attack: {{ currentPlayer.spcAtkLeft}}</button>

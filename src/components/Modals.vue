@@ -1,6 +1,6 @@
 <template>
   <div>
-    <modal name="play-dead" :width="320" :height="500" :clickToClose="false">
+    <modal name="play-dead" :width="320" :height="550" :clickToClose="false">
       <div class="player-dead-modal">
         <div class="player-dead-modal__header">
           <img class="player-dead-modal__header__skull-one" src="../assets/Skull.svg" alt="skulls" />
@@ -9,6 +9,10 @@
         </div>
         <img class="player-dead-modal__img" src="../assets/Tombstone.svg" alt="tombstone" />
         <button class="restart-btn" @click="$emit('gameResetModal-method')">Restart Game</button>
+        <p class="player-dead-modal__plug">
+          Check out more of my work at
+          <a href="http://www.JoshTag.com">www.JoshTag.com</a>
+        </p>
       </div>
     </modal>
 
@@ -24,16 +28,16 @@
       </div>
     </modal>
 
-    <modal name="game-assets" :width="400" height="auto" >
+    <modal name="game-assets" :width="400" height="auto">
       <div>
-        <GameAssets/>
+        <GameAssets />
       </div>
     </modal>
   </div>
 </template>
 
 <script>
-import GameAssets from "./GameAssets"
+import GameAssets from "./GameAssets";
 
 export default {
   name: "Modals",
@@ -86,6 +90,17 @@ export default {
     &__skull-two {
       animation: skulls 3.5s infinite linear reverse;
       transform: scaleX(-1);
+    }
+  }
+
+  &__plug {
+    padding: 10px 16px;
+    text-align: center;
+    color: #303841;
+
+    a {
+      text-decoration: none;
+      color: #303841;
     }
   }
 }

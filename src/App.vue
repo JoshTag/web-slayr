@@ -115,11 +115,11 @@ export default {
         attackMethods[Math.floor(Math.random() * attackMethods.length)];
 
       if (method === 1) {
-        this.attackLoop(50);
+        this.atkNormal(500);
       } else if (method === 2) {
         this.attackHeal(200, 2500);
       } else {
-        this.attackHealth(200, 0.4);
+        this.attackHealth(200, 0.5);
       }
 
       this.checkLoss();
@@ -130,11 +130,11 @@ export default {
         attackMethods[Math.floor(Math.random() * attackMethods.length)];
 
       if (method === 1) {
-        this.attackLoop(100);
+        this.atkNormal(1000);
       } else if (method === 2) {
         this.attackHeal(500, 5000);
       } else {
-        this.attackHealth(500, 0.75);
+        this.attackHealth(500, 1);
       }
 
       this.checkLoss();
@@ -174,48 +174,10 @@ export default {
       }
       this.checkLoss();
     },
-    attackLoop(dmg) {
-      setTimeout(() => {
-        this.currentPlayer.currentHP -= dmg;
-        this.checkLoss();
-        setTimeout(() => {
-          this.currentPlayer.currentHP -= dmg;
-          this.checkLoss();
-          setTimeout(() => {
-            this.currentPlayer.currentHP -= dmg;
-            this.checkLoss();
-            setTimeout(() => {
-              this.currentPlayer.currentHP -= dmg;
-              this.checkLoss();
-              setTimeout(() => {
-                this.currentPlayer.currentHP -= dmg;
-                this.checkLoss();
-                setTimeout(() => {
-                  this.currentPlayer.currentHP -= dmg;
-                  this.checkLoss();
-                  setTimeout(() => {
-                    this.currentPlayer.currentHP -= dmg;
-                    this.checkLoss();
-                    setTimeout(() => {
-                      this.currentPlayer.currentHP -= dmg;
-                      this.checkLoss();
-                      setTimeout(() => {
-                        this.currentPlayer.currentHP -= dmg;
-                        this.checkLoss();
-                        setTimeout(() => {
-                          this.currentPlayer.currentHP -= dmg;
-                          this.checkLoss();
-                        }, 100);
-                      }, 100);
-                    }, 100);
-                  }, 100);
-                }, 100);
-              }, 100);
-            }, 100);
-          }, 100);
-        }, 100);
-      }, 100);
-      this.battleLog.push(`You've been attacked for 500 damage`);
+    atkNormal(dmg) {
+      this.currentPlayer.currentHP -= dmg;
+      this.checkLoss();
+      this.battleLog.push(`You've been attacked for ${dmg} damage`);
 
       if (this.currentPlayer.currentHP <= 0) {
         this.currentPlayer.currentHP = 0;
@@ -262,7 +224,7 @@ export default {
       );
     },
     basicAtkFive() {
-      let DamageMiss = [1, 200];
+      let DamageMiss = [1, this.currentPlayer.damage, this.currentPlayer.damage];
       let attackRandom =
         DamageMiss[Math.floor(Math.random() * DamageMiss.length)];
 
@@ -271,7 +233,7 @@ export default {
       this.battleLog.push(`you've attacked for ${attackRandom} damage`);
     },
     basicAtkSix() {
-      let DamageMiss = [1, 350, 350];
+      let DamageMiss = [1, this.currentPlayer.damage, this.currentPlayer.damage];
       let attackRandom =
         DamageMiss[Math.floor(Math.random() * DamageMiss.length)];
 
@@ -279,14 +241,14 @@ export default {
       this.battleLog.push(`you've attacked for ${attackRandom} damage`);
     },
     sqlAtk() {
-      if (this.currentPlayer.dblAtkLeft > 0) {
-        this.currentMonster.currentHP -= this.currentPlayer.dblAtk * 2;
+      if (this.currentPlayer.sqlAtkLeft > 0) {
+        this.currentMonster.currentHP -= this.currentPlayer.sqlAtk;
 
         this.monsterAtk();
-        this.currentPlayer.dblAtkLeft -= 1;
+        this.currentPlayer.sqlAtkLeft -= 1;
 
         this.battleLog.push(
-          `you've attacked with an SQL Injection for ${this.currentPlayer.dblAtk} damage`
+          `you've attacked with an SQL Injection for ${this.currentPlayer.sqlAtk} damage`
         );
       } else {
         this.battleLog.push(
@@ -390,8 +352,8 @@ export default {
         currentHP: 100,
         maxHP: 100,
         attack: 10,
-        dblAtk: 10,
-        dblAtkLeft: 3,
+        sqlAtk: 20,
+        sqlAtkLeft: 3,
         specialAtk: 25,
         spcAtkLeft: 1,
         hpPot: 3,
@@ -407,8 +369,8 @@ export default {
             currentHP: 200,
             maxHP: 200,
             attack: 25,
-            dblAtk: 15,
-            dblAtkLeft: 3,
+            sqlAtk: 30,
+            sqlAtkLeft: 3,
             specialAtk: 50,
             spcAtkLeft: 1,
             hpPot: 4,
@@ -421,8 +383,8 @@ export default {
             name: "Senior Dev",
             currentHP: 500,
             maxHP: 500,
-            dblAtk: 25,
-            dblAtkLeft: 3,
+            sqlAtk: 50,
+            sqlAtkLeft: 3,
             specialAtk: 70,
             spcAtkLeft: 1,
             hpPot: 5,
@@ -435,8 +397,8 @@ export default {
             name: "Full-Stack Dev",
             currentHP: 1000,
             maxHP: 1000,
-            dblAtk: 50,
-            dblAtkLeft: 5,
+            sqlAtk: 100,
+            sqlAtkLeft: 5,
             specialAtk: 150,
             spcAtkLeft: 1,
             hpPot: 10,
@@ -449,8 +411,8 @@ export default {
             name: "Product Manager",
             currentHP: 2500,
             maxHP: 2500,
-            dblAtk: 150,
-            dblAtkLeft: 5,
+            sqlAtk: 300,
+            sqlAtkLeft: 5,
             specialAtk: 500,
             spcAtkLeft: 1,
             hpPot: 20,
@@ -463,12 +425,12 @@ export default {
             name: "CTO",
             currentHP: 5000,
             maxHP: 5000,
-            dblAtk: 300,
-            dblAtkLeft: 5,
+            sqlAtk: 600,
+            sqlAtkLeft: 5,
             specialAtk: 1000,
             spcAtkLeft: 1,
             hpPot: 20,
-            damage: 400,
+            damage: 300,
             healing: 1000,
             image: require("./assets/Player-six.png")
           }
@@ -515,10 +477,10 @@ export default {
             currentHP: 2500,
             maxHP: 2500,
             description:
-              "Spicy P is the ultimate web developer! \
-            It will attack you multiple times for a total of 500hp. \
-            It will use callbacks to attack you for 200 damage and heal for 200. \
-            Lastly it's DDoS attack will attack you for 40% of its missing health. \
+              "Spicy P uses his spice to spice his developing skills! \
+            It can attack you for 500hp, \
+            or attack you for 200 damage and heal for 200, \
+            or can attack you for 50% of its missing health. \
             You also have a chance to only do 1 dmg",
             image: require("./assets/Pepper.svg")
           },
