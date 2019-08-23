@@ -3,10 +3,10 @@
     <div class="controls-container__player">
       <div class="controls-container__player__group">
         <button class="controls-container__btn" @click="$emit('atk-method')">Attack</button>
-        <button class="controls-container__btn" @click="$emit('doubleAtk-method')">Double Attack: {{ currentPlayer.dblAtkLeft}}</button>
+        <button class="controls-container__btn" @click="$emit('sqlAtk-method')">SQL Injection: {{ currentPlayer.dblAtkLeft}}</button>
       </div>
       <div class="controls-container__player__group">
-        <button class="controls-container__btn" @click="$emit('specialAtk-method')">Special Attack: {{ currentPlayer.spcAtkLeft}}</button>
+        <button class="controls-container__btn" @click="$emit('specialAtk-method')">DDoS Attack: {{ currentPlayer.spcAtkLeft}}</button>
         <button class="controls-container__btn" @click="$emit('healthPot-method')">Health Potion: {{ currentPlayer.hpPot}}</button>
       </div>
     </div>

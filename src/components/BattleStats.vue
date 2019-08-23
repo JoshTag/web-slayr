@@ -3,10 +3,10 @@
     <div class="stats-container__stats">
       <div class="stats-container__stats__dblWrap">
         <p>ATK DMG: {{ currentPlayer.damage}}</p>
-        <p>DBL ATK DMG: {{ dblAtkCalc }}</p>
+        <p>SQL ATK DMG: {{ dblAtkCalc }}</p>
       </div>
       <div class="stats-container__stats__dblWrap">
-        <p>SPC ATK DMG: {{ currentPlayer.specialAtk}}</p>
+        <p>DDoS ATK DMG: {{ currentPlayer.specialAtk}}</p>
         <p>HEALING: {{ currentPlayer.healing}}</p>
       </div>
     </div>

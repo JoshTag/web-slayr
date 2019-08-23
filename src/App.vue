@@ -4,7 +4,7 @@
     <!-- <button v-on:click="showGameEnd">End game modal</button> -->
     <!-- <button v-on:click="showDeadModal">death modal</button> -->
     <!-- <button style="position: absolute" v-on:click="setMonsterLvl">Monster LVL</button> -->
-    <StartPage v-bind:startGame="startGame" v-on:startGame-method="setGameData" />
+    <StartPage v-bind:startGame="startGame" v-on:startGame-method="setGameData" v-on:showGameAssets-method="showGameAssets" />
     <div class="main" v-if="startGame">
       <BattleLog class="main__battlelog" v-bind:battleLog="battleLog" />
       <BattleStats
@@ -19,7 +19,7 @@
       <Controls
         v-bind:currentPlayer="currentPlayer"
         v-on:atk-method="basicAtk"
-        v-on:doubleAtk-method="doubleAtk"
+        v-on:sqlAtk-method="sqlAtk"
         v-on:healthPot-method="healthPot"
         v-on:setMonsterLvl-method="setMonsterLvl"
         v-on:specialAtk-method="specialAtk"
@@ -278,7 +278,7 @@ export default {
       this.currentMonster.currentHP -= attackRandom;
       this.battleLog.push(`you've attacked for ${attackRandom} damage`);
     },
-    doubleAtk() {
+    sqlAtk() {
       if (this.currentPlayer.dblAtkLeft > 0) {
         this.currentMonster.currentHP -= this.currentPlayer.dblAtk * 2;
 
@@ -286,11 +286,11 @@ export default {
         this.currentPlayer.dblAtkLeft -= 1;
 
         this.battleLog.push(
-          `you've attacked twice for ${this.currentPlayer.dblAtk} damage each`
+          `you've attacked with an SQL Injection for ${this.currentPlayer.dblAtk} damage`
         );
       } else {
         this.battleLog.push(
-          `you've used the maximum number of double attacks this turn`
+          `you've used the maximum number of SQL Injections this turn`
         );
       }
     },
@@ -299,7 +299,7 @@ export default {
         this.currentMonster.currentHP -= this.currentPlayer.specialAtk;
         this.currentPlayer.spcAtkLeft -= 1;
         this.battleLog.push(
-          `you've attacked for ${this.currentPlayer.specialAtk} damage`
+          `you've DDoS'd ${this.currentMonster.name} for ${this.currentPlayer.specialAtk} damage`
         );
 
         this.monsterAtk();
@@ -331,6 +331,12 @@ export default {
     },
     hideGameEnd() {
       this.$modal.hide("monster-dead");
+    },
+    showGameAssets() {
+      this.$modal.show("game-assets");
+    },
+    hideGameAssets() {
+      this.$modal.hide("game-assets");
     },
     gameResetModal() {
       this.hide();
@@ -426,7 +432,7 @@ export default {
           },
           {
             lvl: 4,
-            name: "Full-Stack Developer",
+            name: "Full-Stack Dev",
             currentHP: 1000,
             maxHP: 1000,
             dblAtk: 50,
@@ -546,6 +552,8 @@ body {
   background: url("./assets/Background.png");
   background-repeat: no-repeat;
   background-size: 770px 100vh;
+  background-attachment: fixed;
+  background-position: center;
 
   @media screen and (min-width: 600px) {
     background-size: 100vw 100vh;

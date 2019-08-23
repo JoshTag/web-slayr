@@ -4,7 +4,7 @@
       <div class="player-dead-modal">
         <div class="player-dead-modal__header">
           <img class="player-dead-modal__header__skull-one" src="../assets/Skull.svg" alt="skulls" />
-          <h2>YOU DED!</h2>
+          <h2>U DED!</h2>
           <img class="player-dead-modal__header__skull-two" src="../assets/Skull.svg" alt="skulls" />
         </div>
         <img class="player-dead-modal__img" src="../assets/Tombstone.svg" alt="tombstone" />
@@ -23,12 +23,21 @@
         </p>
       </div>
     </modal>
+
+    <modal name="game-assets" :width="400" height="auto" >
+      <div>
+        <GameAssets/>
+      </div>
+    </modal>
   </div>
 </template>
 
 <script>
+import GameAssets from "./GameAssets"
+
 export default {
-  name: "Modals"
+  name: "Modals",
+  components: { GameAssets }
 };
 </script>
 
