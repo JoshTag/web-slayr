@@ -3,7 +3,7 @@
     <!-- uncomment to test modal/game lvl-->
     <!-- <button v-on:click="showGameEnd">End game modal</button> -->
     <!-- <button v-on:click="showDeadModal">death modal</button> -->
-    <!-- <button style="position: absolute" v-on:click="setMonsterLvl">Monster LVL</button> -->
+    <button style="position: absolute" v-on:click="setMonsterLvl">Monster LVL</button>
     <StartPage v-bind:startGame="startGame" v-on:startGame-method="setGameData" v-on:showGameAssets-method="showGameAssets" />
     <div class="main" v-if="startGame">
       <BattleLog class="main__battlelog" v-bind:battleLog="battleLog" />
@@ -134,7 +134,7 @@ export default {
       } else if (method === 2) {
         this.attackHeal(500, 5000);
       } else {
-        this.attackHealth(500, 1);
+        this.attackHealth(500, .75);
       }
 
       this.checkLoss();
@@ -429,7 +429,7 @@ export default {
             sqlAtkLeft: 5,
             specialAtk: 1000,
             spcAtkLeft: 1,
-            hpPot: 20,
+            hpPot: 25,
             damage: 300,
             healing: 1000,
             image: require("./assets/Player-six.png")
