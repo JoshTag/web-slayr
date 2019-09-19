@@ -85,7 +85,7 @@ export default {
           } else {
             this.currentPlayer.currentHP -= this.currentMonster.attack;
             this.battleLog.push(
-              `you've been attacked for ${this.currentMonster.attack}`
+              `You've been attacked for ${this.currentMonster.attack}`
             );
             this.checkLoss();
           }
@@ -97,7 +97,7 @@ export default {
       let attackRandom = damage[Math.floor(Math.random() * damage.length)];
 
       this.currentPlayer.currentHP -= attackRandom;
-      this.battleLog.push(`you've been attacked for ${attackRandom}`);
+      this.battleLog.push(`You've been attacked for ${attackRandom}`);
 
       this.checkLoss();
     },
@@ -105,7 +105,7 @@ export default {
       let attack = (this.currentMonster.increaseAtkBase += 25);
 
       this.currentPlayer.currentHP -= attack;
-      this.battleLog.push(`you've been attacked for ${attack}`);
+      this.battleLog.push(`You've been attacked for ${attack}`);
 
       this.checkLoss();
     },
@@ -196,7 +196,7 @@ export default {
       } else {
         this.currentMonster.currentHP -= this.currentPlayer.attack;
         this.battleLog.push(
-          `you've attacked for ${this.currentPlayer.attack} damage`
+          `You've attacked for ${this.currentPlayer.attack} damage`
         );
       }
 
@@ -208,7 +208,7 @@ export default {
         damageRange[Math.floor(Math.random() * damageRange.length)];
 
       this.currentMonster.currentHP -= attackRandom;
-      this.battleLog.push(`you've attacked for ${attackRandom} damage`);
+      this.battleLog.push(`You've attacked for ${attackRandom} damage`);
     },
     basicAtkFour() {
       let DamageMiss = [0, 0, 75, 75, 75];
@@ -220,7 +220,7 @@ export default {
       this.battleLog.push(
         attackRandom === 0
           ? "You missed!"
-          : `you've attacked for ${attackRandom} damage`
+          : `You've attacked for ${attackRandom} damage`
       );
     },
     basicAtkFive() {
@@ -230,7 +230,7 @@ export default {
 
       this.currentMonster.currentHP -= attackRandom;
 
-      this.battleLog.push(`you've attacked for ${attackRandom} damage`);
+      this.battleLog.push(`You've attacked for ${attackRandom} damage`);
     },
     basicAtkSix() {
       let DamageMiss = [1, this.currentPlayer.damage, this.currentPlayer.damage];
@@ -238,7 +238,7 @@ export default {
         DamageMiss[Math.floor(Math.random() * DamageMiss.length)];
 
       this.currentMonster.currentHP -= attackRandom;
-      this.battleLog.push(`you've attacked for ${attackRandom} damage`);
+      this.battleLog.push(`You've attacked for ${attackRandom} damage`);
     },
     sqlAtk() {
       if (this.currentPlayer.sqlAtkLeft > 0) {
@@ -248,11 +248,11 @@ export default {
         this.currentPlayer.sqlAtkLeft -= 1;
 
         this.battleLog.push(
-          `you've attacked with an SQL Injection for ${this.currentPlayer.sqlAtk} damage`
+          `You've attacked with an SQL Injection for ${this.currentPlayer.sqlAtk} damage`
         );
       } else {
         this.battleLog.push(
-          `you've used the maximum number of SQL Injections this turn`
+          `You've used the maximum number of SQL Injections this turn`
         );
       }
     },
@@ -261,7 +261,7 @@ export default {
         this.currentMonster.currentHP -= this.currentPlayer.specialAtk;
         this.currentPlayer.spcAtkLeft -= 1;
         this.battleLog.push(
-          `you've DDoS'd ${this.currentMonster.name} for ${this.currentPlayer.specialAtk} damage`
+          `You've DDoS'd ${this.currentMonster.name} for ${this.currentPlayer.specialAtk} damage`
         );
 
         this.monsterAtk();
@@ -277,9 +277,9 @@ export default {
       ) {
         this.currentPlayer.currentHP += this.currentPlayer.healing;
         this.currentPlayer.hpPot -= 1;
-        this.battleLog.push(`you healed for ${this.currentPlayer.healing} HP`);
+        this.battleLog.push(`You healed for ${this.currentPlayer.healing} HP`);
       } else {
-        this.battleLog.push(`you cannot use this item`);
+        this.battleLog.push(`You cannot use this item`);
       }
     },
     showDeadModal() {
@@ -443,7 +443,7 @@ export default {
             maxHP: 200,
             attack: 40,
             description:
-              "Twitters long lost 404 page whale will attack you for 40hp... \
+              "Twitters long lost 404 page fail whale will attack you for 40hp... \
               The last four got lost somewhere ¯\\_(ツ)_/¯",
             image: require("./assets/Whale.svg")
           },
@@ -468,7 +468,7 @@ export default {
             description:
               "This slug constantly collects more data on you. \
               It will attack you for 100hp and each subsequent attack will increase by 25. \
-              You also havea 20% chance to miss your attack",
+              You also have a 20% chance to miss your attack",
             image: require("./assets/data.svg")
           },
           {
