@@ -39,7 +39,6 @@ import BattleLog from "./components/BattleLog";
 import BattleStats from "./components/BattleStats";
 import StartPage from "./components/StartPage";
 import Modals from "./components/Modals";
-import { setTimeout } from "timers";
 
 export default {
   name: "app",
@@ -338,13 +337,13 @@ export default {
       ];
       this.currentMonster = {
         lvl: 1,
-        name: "Merge-a-pus",
+        name: "Cat-a-pus",
         currentHP: 100,
         maxHP: 100,
         attack: 20,
         description:
-          "The Merge-a-pus will attack you with merge conflicts for 20hp",
-        image: require("./assets/Merge.svg")
+          "This Git Hub Cat-a-pus will attack you with merge conflicts for 20hp",
+        image: require("./assets/Cat.svg")
       };
       this.currentPlayer = {
         lvl: 1,

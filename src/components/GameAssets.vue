@@ -2,7 +2,7 @@
   <div class="asset-img-container">
     <img class="asset-image" src="../assets/data.svg" />
     <img class="asset-image" src="../assets/Hacker.svg" />
-    <img class="asset-image" src="../assets/Merge.svg" />
+    <img class="asset-image" src="../assets/Cat.svg" />
     <img class="asset-image" src="../assets/Whale.svg" />
     <img class="asset-image" src="../assets/Pepper.svg" />
     <img class="asset-image" src="../assets/Salt.svg" />
