@@ -333,7 +333,7 @@ export default {
       this.currentLvl = 0;
       this.battleLog = [
         "You're a new web developer looking through the caves of code. \
-        It is said that if you defeat all five code monsters, you yourself will become the greatest coder of all time!"
+        Defeat all five coding monsters to win ice cream."
       ];
       this.currentMonster = {
         lvl: 1,
