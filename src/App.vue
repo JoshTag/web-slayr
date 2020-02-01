@@ -293,12 +293,6 @@ export default {
     hideGameEnd() {
       this.$modal.hide("monster-dead");
     },
-    showGameAssets() {
-      this.$modal.show("game-assets");
-    },
-    hideGameAssets() {
-      this.$modal.hide("game-assets");
-    },
     gameResetModal() {
       this.hide();
       this.setGameData();

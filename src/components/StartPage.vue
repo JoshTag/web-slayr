@@ -27,9 +27,7 @@
         </g>
       </g>
     </svg>
-    <button class="game-assets-btn" @click="$emit('showGameAssets-method')">
-      Game Assets
-    </button>
+    <p class="copywrite">&copy; Joshua Taguicana 2020</p>
   </div>
 </template>
 
@@ -49,6 +47,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 
   &__logo {
     width: 250px;
@@ -77,17 +76,10 @@ export default {
   }
 }
 
-.game-assets-btn {
-  margin-top: 20px;
-  background: #000;
-  border: none;
-  width: 120px;
-  height: 25px;
-  font-size: 12px;
-
-  &:hover {
-    cursor: pointer;
-  }
+.copywrite {
+  position: absolute;
+  bottom: -5vh;
+  font-size: 1rem;
 }
 
 @keyframes snake {
