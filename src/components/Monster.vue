@@ -2,7 +2,7 @@
   <div class="monster-container">
     <h2 class="monster-container__header">{{ currentMonster.name }}</h2>
     <div id="monster-health">
-      <div v-bind:style="{width: this.monsterHealthBar + '%'}"></div>
+      <div class="current-hp" v-bind:style="{width: this.monsterHealthBar + '%'}"></div>
     </div>
     <p>{{currentMonster.currentHP}} / {{currentMonster.maxHP}}</p>
     <img class="monster-container__img" alt="monster image" v-bind:src="currentMonster.image"/>
@@ -73,6 +73,10 @@ export default {
       margin-top: 0;
     }
   }
+}
+
+.current-hp {
+  transition: 0.3s ease;
 }
 
 #monster-health {

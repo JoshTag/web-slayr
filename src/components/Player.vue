@@ -2,7 +2,7 @@
   <div class="player-container">
     <h2 class="player-container__header">{{ currentPlayer.name }}</h2>
     <div id="player-health">
-      <div v-bind:style="{width: playerHealthBar + '%'}"></div>
+      <div class="current-hp" v-bind:style="{width: playerHealthBar + '%'}"></div>
     </div>
     <p>{{currentPlayer.currentHP}} / {{currentPlayer.maxHP}}</p>
     <img class="player-container__img" alt="player image" v-bind:src="currentPlayer.image" />
@@ -73,6 +73,10 @@ export default {
       margin-top: 0px;
     }
   }
+}
+
+.current-hp {
+  transition: 0.3s ease;
 }
 
 #player-health {
