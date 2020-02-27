@@ -1,29 +1,5 @@
 # web-slayr
 
-## Project setup
-```
-npm install
-```
+A game inspired by turn based fighting games where you start as as junior dev and defeat bosses to work your way up to a CTO.  Built with Vue.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Visit https://webdev-slayer.netlify.com/ to view the full site
