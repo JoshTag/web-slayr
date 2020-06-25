@@ -1,4 +1,4 @@
-# web-slayr
+# Webdev Slayer
 
 A game inspired by turn based fighting games where you start as as junior dev and defeat bosses to work your way up to a CTO.  Built with Vue.
 
